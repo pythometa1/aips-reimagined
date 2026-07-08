@@ -9,12 +9,17 @@ import silverfish from "@/assets/pest-silverfish.png";
 import carpetbeetle from "@/assets/pest-carpetbeetle.png";
 import spider from "@/assets/pest-spider.png";
 import fly from "@/assets/pest-fly.png";
+import photoCockroach from "@/assets/service-cockroach-gel.jpg";
+import photoTermite from "@/assets/service-termite.jpg";
+import photoBedbug from "@/assets/service-bedbug.jpg";
+import photoFogging from "@/assets/service-fogging.jpg";
 
 export type Service = {
   slug: string;
   name: string;
   short: string;
   illust: string;
+  photo?: string;
   summary: string;
   approach: string[];
   warranty: string;
