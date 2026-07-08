@@ -1,7 +1,7 @@
 export const site = {
   name: "Advanced Indian Pest Solution",
   short: "AIPS",
-  tagline: "Protecting Your India · since 2010",
+  tagline: "Protecting Our India · since 2010",
   phone: "+91 94774 01805",
   phoneHref: "tel:+919477401805",
   email: "info@advancedindianpestsolution.in",
