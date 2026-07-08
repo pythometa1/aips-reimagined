@@ -77,16 +77,23 @@ export function SiteHeader() {
         {open && (
           <div className="border-t border-border bg-background lg:hidden">
             <nav className="mx-auto flex max-w-7xl flex-col px-6 py-3">
-              {nav.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-forest-deep hover:bg-cream-warm"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {nav.map((item) => {
+                const isContact = item.to === "/contact";
+                return (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    onClick={() => setOpen(false)}
+                    className={`rounded-lg px-3 py-2.5 text-sm font-medium ${
+                      isContact
+                        ? "bg-amber text-ink shadow-[var(--shadow-cta)]"
+                        : "text-forest-deep hover:bg-cream-warm"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
               <a
                 href={site.phoneHref}
                 className="mt-2 rounded-lg bg-forest-deep px-3 py-2.5 text-center text-sm font-medium text-cream"
