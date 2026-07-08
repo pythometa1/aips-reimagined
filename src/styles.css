@@ -57,6 +57,8 @@
   --color-cream: var(--cream);
   --color-cream-warm: var(--cream-warm);
   --color-ink: var(--ink);
+
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
 }
 
 :root {
