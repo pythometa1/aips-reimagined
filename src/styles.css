@@ -57,6 +57,8 @@
   --color-cream: var(--cream);
   --color-cream-warm: var(--cream-warm);
   --color-ink: var(--ink);
+
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
 }
 
 :root {
@@ -116,6 +118,15 @@
   --shadow-lifted: 0 4px 8px -2px oklch(0.28 0.06 155 / 0.08), 0 24px 48px -16px oklch(0.28 0.06 155 / 0.24);
   --shadow-cta: 0 10px 30px -8px oklch(0.72 0.18 68 / 0.55);
   --shadow-whatsapp: 0 10px 30px -8px oklch(0.65 0.2 150 / 0.55);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .dark {
