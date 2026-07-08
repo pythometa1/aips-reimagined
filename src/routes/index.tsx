@@ -3,7 +3,7 @@ import { CheckCircle2, ArrowRight, ShieldCheck, Sparkles, Users, Award } from "l
 import heroCrew from "@/assets/hero-crew.jpg";
 import heroKitchen from "@/assets/hero-kitchen.jpg";
 import familySafe from "@/assets/family-safe.jpg";
-import equipment from "@/assets/equipment-flatlay.jpg";
+import herbalProtocol from "@/assets/herbal-protocol.jpg";
 import serviceBedbug from "@/assets/service-bedbug.jpg";
 import serviceFogging from "@/assets/service-fogging.jpg";
 import serviceCockroach from "@/assets/service-cockroach-gel.jpg";
@@ -280,8 +280,8 @@ function Home() {
           </div>
           <div className="relative">
             <img
-              src={equipment}
-              alt="Pest control equipment — sprayer, amber chemical bottle, gloves and neem"
+              src={herbalProtocol}
+              alt="AIPS technician applying herbal, family-safe pest treatment in an Indian home"
               width={1280}
               height={960}
               loading="lazy"
