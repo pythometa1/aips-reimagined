@@ -25,6 +25,19 @@ export function MobileBottomBar() {
         aria-label="Quick contact"
       >
         <div className="relative flex items-stretch justify-between rounded-2xl border border-forest-deep/10 bg-cream/95 px-2 py-2 shadow-[0_12px_40px_-8px_rgba(11,61,46,0.35)] backdrop-blur-md">
+          <a
+            href={site.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-[11px] font-semibold text-forest-deep transition-colors active:bg-forest-deep/10"
+            aria-label="WhatsApp us"
+          >
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-[#25D366]/15 text-[#128C4A] transition-colors group-active:bg-[#25D366]/25">
+              <WhatsAppIcon className="h-4 w-4" />
+            </span>
+            WhatsApp
+          </a>
+
           <Link
             to="/contact"
             className="group flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-[11px] font-semibold text-forest-deep transition-colors active:bg-forest-deep/10"
