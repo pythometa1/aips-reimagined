@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Award, Users, Building2, Sprout, ShieldCheck, Trophy, Quote, Linkedin, Briefcase, GraduationCap } from "lucide-react";
+import { Award, Users, Building2, Sprout, ShieldCheck, Trophy, Quote, Briefcase, GraduationCap } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
 import { StatsRow } from "@/components/site/StatsRow";
