@@ -53,7 +53,7 @@ function ServiceDetail() {
           <img
             src={heroImage}
             alt={`AIPS technician performing ${service.name.toLowerCase()}`}
-            className="absolute inset-0 h-full w-full object-cover object-[70%_center]"
+            className="absolute inset-0 h-full w-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-forest-deep via-forest-deep/40 to-transparent" />
         </div>
