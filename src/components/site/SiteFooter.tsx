@@ -7,10 +7,10 @@ import { services } from "@/data/services";
 export function SiteFooter() {
   return (
     <footer className="hero-gradient grain-overlay mt-24 text-cream">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4">
-        <div className="md:col-span-1">
-          <div className="[&_span]:text-cream [&_.text-forest]:text-amber [&_.text-muted-foreground]:text-cream/60">
-            <Logo />
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-[1.6fr_1fr_1.2fr_1.3fr]">
+        <div>
+          <div className="[&_span]:text-cream [&_.text-forest]:text-amber [&_.text-muted-foreground]:text-cream/60 [&_.text-muted-foreground\/50]:text-cream/40">
+            <Logo variant="footer" />
           </div>
           <p className="mt-4 text-sm leading-relaxed text-cream/70">
             Licensed, science-led pest control with CIB-approved, family-safe treatments and a written warranty on every job.

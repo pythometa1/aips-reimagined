@@ -17,34 +17,50 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export function MobileBottomBar() {
   return (
-    <nav
-      className="fixed bottom-0 left-0 right-0 z-50 grid h-16 grid-cols-3 border-t border-border bg-cream shadow-[0_-4px_20px_rgba(0,0,0,0.08)] md:hidden"
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-      aria-label="Quick contact"
-    >
-      <a
-        href={site.phoneHref}
-        className="flex flex-col items-center justify-center gap-1 text-xs font-medium text-forest-deep hover:bg-forest-deep/5"
+    <>
+      <div className="h-24 md:hidden" aria-hidden />
+      <nav
+        className="fixed inset-x-3 bottom-3 z-50 md:hidden"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+        aria-label="Quick contact"
       >
-        <Phone className="h-5 w-5" />
-        Call
-      </a>
-      <a
-        href={site.whatsapp}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex flex-col items-center justify-center gap-1 text-xs font-medium text-forest-deep hover:bg-forest-deep/5"
-      >
-        <WhatsAppIcon className="h-5 w-5" />
-        WhatsApp
-      </a>
-      <Link
-        to="/contact"
-        className="flex flex-col items-center justify-center gap-1 bg-forest-deep text-xs font-medium text-cream hover:bg-forest"
-      >
-        <CalendarCheck className="h-5 w-5" />
-        Free Inspection
-      </Link>
-    </nav>
+        <div className="relative flex items-stretch justify-between rounded-2xl border border-forest-deep/10 bg-cream/95 px-2 py-2 shadow-[0_12px_40px_-8px_rgba(11,61,46,0.35)] backdrop-blur-md">
+          <a
+            href={site.phoneHref}
+            className="group flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-[11px] font-semibold text-forest-deep transition-colors active:bg-forest-deep/10"
+            aria-label="Call us"
+          >
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-forest-deep/10 transition-colors group-active:bg-forest-deep/20">
+              <Phone className="h-4 w-4" />
+            </span>
+            Call
+          </a>
+
+          <a
+            href={site.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-[11px] font-semibold text-forest-deep transition-colors active:bg-forest-deep/10"
+            aria-label="WhatsApp us"
+          >
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-[#25D366]/15 text-[#128C4A] transition-colors group-active:bg-[#25D366]/25">
+              <WhatsAppIcon className="h-4 w-4" />
+            </span>
+            WhatsApp
+          </a>
+
+          <Link
+            to="/contact"
+            className="group relative -mt-7 flex flex-1 flex-col items-center justify-end gap-1 pb-1 text-[11px] font-bold text-forest-deep"
+            aria-label="Book a free inspection"
+          >
+            <span className="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-amber to-amber/85 text-forest-deep shadow-[0_10px_24px_-6px_rgba(212,148,44,0.7)] ring-4 ring-cream transition-transform group-active:scale-95">
+              <CalendarCheck className="h-5 w-5" strokeWidth={2.4} />
+            </span>
+            Free Inspection
+          </Link>
+        </div>
+      </nav>
+    </>
   );
 }
