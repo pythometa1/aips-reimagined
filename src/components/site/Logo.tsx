@@ -13,7 +13,7 @@ export function Logo({
     <Link
       to="/"
       className="group flex items-center gap-3"
-      aria-label="Advanced Indian Pest Solution — Protecting Your India"
+      aria-label="Advanced Indian Pest Solution — Protecting Our India"
     >
       <img
         src={logo}
@@ -47,7 +47,7 @@ export function Logo({
             }
           >
             <span aria-hidden className="h-px w-4 bg-amber sm:w-6" />
-            Protecting Your India
+            Protecting Our India
             <span aria-hidden className="h-px w-4 bg-amber sm:w-6" />
           </span>
         </span>
