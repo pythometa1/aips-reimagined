@@ -46,16 +46,27 @@ function ServiceDetail() {
 
   return (
     <>
-      {/* Immersive image hero — technician clearly visible on right, dark gradient only on the left where text sits */}
+      {/* Immersive image hero — on desktop image sits behind text (right), on mobile image stacks on top of text panel */}
       <section className="relative isolate overflow-hidden bg-forest-deep text-cream">
+        {/* Mobile: image on top as a proper aspect-ratio banner */}
+        <div className="relative aspect-[4/3] w-full md:hidden">
+          <img
+            src={heroImage}
+            alt={`AIPS technician performing ${service.name.toLowerCase()}`}
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-forest-deep via-forest-deep/40 to-transparent" />
+        </div>
+
+        {/* Desktop: image absolute background, text overlays on left */}
         <img
           src={heroImage}
-          alt={`AIPS technician performing ${service.name.toLowerCase()}`}
+          alt=""
+          aria-hidden="true"
           width={1920}
           height={1024}
-          className="absolute inset-0 h-full w-full object-cover object-right"
+          className="absolute inset-0 hidden h-full w-full object-cover object-right md:block"
         />
-        {/* Desktop: left dark panel fades out by ~60% so the technician on the right stays sharp and unblurred */}
         <div
           className="absolute inset-0 hidden md:block"
           style={{
@@ -63,38 +74,37 @@ function ServiceDetail() {
               "linear-gradient(90deg, rgba(11,61,46,0.95) 0%, rgba(11,61,46,0.85) 30%, rgba(11,61,46,0.35) 55%, rgba(11,61,46,0) 72%)",
           }}
         />
-        {/* Mobile: vertical dark wash so text stays legible over the image */}
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/70 to-forest-deep/40 md:hidden" />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28 lg:py-32">
+        <div className="relative mx-auto max-w-7xl px-6 py-10 md:py-28 lg:py-32">
           <div className="max-w-2xl">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-full bg-amber/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-amber ring-1 ring-inset ring-amber/40">
+              <span className="rounded-full bg-amber/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-amber ring-1 ring-inset ring-amber/40">
                 Service
               </span>
-              <span className="rounded-full border border-cream/25 bg-cream/5 px-3 py-1 text-xs font-semibold text-cream/85 backdrop-blur-sm">
+              <span className="rounded-full border border-cream/25 bg-cream/5 px-3 py-1 text-[11px] font-semibold text-cream/85 backdrop-blur-sm">
                 CIB · Family-safe
               </span>
-              <span className="rounded-full border border-cream/25 bg-cream/5 px-3 py-1 text-xs font-semibold text-cream/85 backdrop-blur-sm">
+              <span className="rounded-full border border-cream/25 bg-cream/5 px-3 py-1 text-[11px] font-semibold text-cream/85 backdrop-blur-sm">
                 Written warranty
               </span>
             </div>
 
-            <h1 className="mt-5 font-serif text-4xl font-medium leading-[1.05] text-cream md:text-6xl">
+            <h1 className="mt-4 font-serif text-[2rem] font-medium leading-[1.1] text-cream md:mt-5 md:text-6xl">
               {service.name} <span className="text-amber">in India</span>
             </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-cream/85 md:text-lg">
+            <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-cream/85 md:mt-5 md:text-lg">
               {service.summary}
             </p>
 
-            <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-2 text-sm text-cream ring-1 ring-inset ring-amber/30 backdrop-blur-sm">
-              <ShieldCheck className="h-4 w-4 text-amber" /> {service.warranty}
+            <div className="mt-4 inline-flex items-start gap-2 rounded-2xl bg-cream/10 px-4 py-2 text-sm text-cream ring-1 ring-inset ring-amber/30 backdrop-blur-sm">
+              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-amber" />
+              <span>{service.warranty}</span>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-8">
               <Button
                 asChild
-                className="h-12 rounded-xl px-6 text-base font-semibold shadow-[var(--shadow-cta)]"
+                className="h-12 w-full rounded-xl px-6 text-base font-semibold shadow-[var(--shadow-cta)] sm:w-auto"
                 style={{ background: "var(--gradient-amber)", color: "var(--ink)" }}
               >
                 <Link to="/contact">Book free inspection <ArrowRight className="ml-2 h-4 w-4" /></Link>
@@ -117,6 +127,7 @@ function ServiceDetail() {
           </div>
         </div>
       </section>
+
 
       {/* Overview + inspection form */}
       <Section>
