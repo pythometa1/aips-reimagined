@@ -6,6 +6,10 @@ import heroKitchen from "@/assets/hero-kitchen.jpg";
 import heroHandover from "@/assets/hero-handover.jpg";
 import familySafe from "@/assets/family-safe.jpg";
 import equipment from "@/assets/equipment-flatlay.jpg";
+import serviceBedbug from "@/assets/service-bedbug.jpg";
+import serviceFogging from "@/assets/service-fogging.jpg";
+import serviceCockroach from "@/assets/service-cockroach-gel.jpg";
+import serviceTermite from "@/assets/service-termite.jpg";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -20,12 +24,15 @@ export const Route = createFileRoute("/gallery")({
 });
 
 const shots = [
-  { src: heroCrew, cap: "Field crew before dispatch — Kolkata warehouse" },
-  { src: heroKitchen, cap: "Gel treatment in a commercial kitchen — Pune" },
+  { src: heroCrew, cap: "Field technician on-site at an Indian residential society" },
+  { src: serviceBedbug, cap: "Bed bug treatment — mattress seam & headboard spray" },
+  { src: serviceFogging, cap: "Society fogging for mosquito control at dusk" },
+  { src: serviceCockroach, cap: "Odourless cockroach gel bait — kitchen hinge" },
+  { src: serviceTermite, cap: "Anti-termite injection at door-frame skirting" },
+  { src: heroKitchen, cap: "Commercial kitchen treatment — Pune" },
   { src: heroHandover, cap: "Warranty handover after a residential job" },
   { src: familySafe, cap: "A family back on the floor within the hour" },
   { src: equipment, cap: "The kit — CIB-labelled chemistry and gloves" },
-  { src: heroCrew, cap: "Morning briefing — species-specific protocols" },
 ];
 
 function Gallery() {
