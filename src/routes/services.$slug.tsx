@@ -271,7 +271,7 @@ function ServiceDetail() {
       {/* CTA banner */}
       <Section>
         <div className="overflow-hidden rounded-3xl bg-forest-deep p-8 text-cream shadow-[var(--shadow-lifted)] md:p-12">
-          <div className="grid gap-6 md:grid-cols-[1.4fr_auto] md:items-center">
+          <div className="grid gap-8 md:grid-cols-[1.4fr_auto] md:items-center">
             <div>
               <h3 className="font-serif text-2xl text-cream md:text-3xl">
                 Book a free {service.short.toLowerCase()} inspection today.
@@ -280,20 +280,27 @@ function ServiceDetail() {
                 A trained AIPS technician will visit, inspect, quote — and only then treat. No pressure, no upsell.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <Button
-                asChild
-                className="h-12 rounded-xl px-6 text-base font-semibold shadow-[var(--shadow-cta)]"
-                style={{ background: "var(--gradient-amber)", color: "var(--ink)" }}
-              >
-                <Link to="/contact">Book inspection <ArrowRight className="ml-2 h-4 w-4" /></Link>
-              </Button>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
                 href={site.phoneHref}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-cream/30 bg-cream/5 px-6 text-base font-medium text-cream hover:bg-cream/10"
+                className="group inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber to-amber-glow px-7 text-base font-bold text-ink shadow-[var(--shadow-cta)] ring-1 ring-inset ring-white/25 transition-transform hover:-translate-y-0.5 hover:shadow-lg"
               >
-                <Phone className="h-4 w-4 text-amber" /> {site.phone}
+                <Phone className="h-5 w-5" /> Call now
               </a>
+              <a
+                href={site.whatsapp}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-whatsapp px-7 text-base font-bold text-whatsapp-foreground shadow-[var(--shadow-whatsapp)] transition-transform hover:-translate-y-0.5 hover:shadow-lg"
+              >
+                <MessageCircle className="h-5 w-5" /> WhatsApp
+              </a>
+              <Button
+                asChild
+                className="h-14 rounded-xl border border-cream/30 bg-cream px-7 text-base font-bold text-forest-deep shadow-sm hover:bg-cream/90"
+              >
+                <Link to="/contact">Free inspection <ArrowRight className="ml-2 h-5 w-5" /></Link>
+              </Button>
             </div>
           </div>
         </div>
