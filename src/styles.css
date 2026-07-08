@@ -52,6 +52,8 @@
   --color-forest-soft: var(--forest-soft);
   --color-amber: var(--amber);
   --color-amber-glow: var(--amber-glow);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
   --color-cream: var(--cream);
   --color-cream-warm: var(--cream-warm);
   --color-ink: var(--ink);
