@@ -54,7 +54,7 @@ export function MobileBottomBar() {
           {/* Call — primary */}
           <a
             href={site.phoneHref}
-            className="group relative flex-[1.4] overflow-hidden rounded-2xl transition-all duration-200 active:scale-95"
+            className="group relative flex-[1.8] overflow-hidden rounded-2xl transition-all duration-200 active:scale-95"
             aria-label="Call us"
           >
             {/* Shimmer background */}
@@ -65,12 +65,12 @@ export function MobileBottomBar() {
                   "linear-gradient(90deg, var(--amber) 0%, var(--amber-glow) 45%, var(--amber) 90%)",
               }}
             />
-            <span className="relative flex h-12 items-center justify-center gap-1.5 px-2 whitespace-nowrap">
+            <span className="relative flex h-12 items-center justify-center gap-1.5 px-2">
               <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-cream/25">
                 <Phone className="h-4 w-4 text-ink" strokeWidth={2.4} />
               </span>
-              <span className="flex flex-col items-start leading-none">
-                <span className="text-sm font-bold text-ink">Call Now</span>
+              <span className="flex flex-col items-start leading-none whitespace-nowrap">
+                <span className="text-[13px] font-bold text-ink">Call Now</span>
                 <span className="text-[9px] font-medium text-ink/70">Available 24/7</span>
               </span>
             </span>
