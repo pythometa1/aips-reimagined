@@ -86,6 +86,7 @@ export const services: Service[] = [
     name: "Rodent Control",
     short: "Rodent",
     illust: rat,
+    photo: photoRodent,
     summary:
       "Discreet trap-and-monitor programme for homes; tamper-proof bait-station perimeters for commercial sites.",
     approach: [
