@@ -8,7 +8,8 @@ export const site = {
   hours: "Mon–Sat, 9 AM – 7 PM",
   whatsapp:
     "https://wa.me/919477401805?text=Hi%20AIPS%2C%20I%27d%20like%20to%20request%20a%20pest%20control%20inspection%20for%20my%20home%2Foffice.%0A%0APreferred%20service%20time%3A%20%5BMorning%20%2F%20Afternoon%20%2F%20Evening%20%2F%20Weekend%5D%0A%0APlease%20call%20me%20back%20to%20confirm.",
-  address: "Headquartered in Kolkata · Serving 18 cities across India",
+  address: "10, Central Park East, Jadavpur, Kolkata – 700032",
+  gst: "19ABCCA7450J1ZG",
 } as const;
 
 export const nav = [
@@ -24,9 +25,13 @@ export const nav = [
 
 export const cities = [
   "Kolkata", "Howrah", "Hooghly", "Durgapur", "Asansol", "Burdwan",
-  "Pune", "Mumbai", "Delhi NCR", "Ranchi", "Jamshedpur",
-  "Guwahati", "Bhubaneswar", "Cuttack", "Patna", "Siliguri",
-  "Bengaluru", "Hyderabad",
+  "Arambagh", "Siliguri", "Bhubaneswar", "Cuttack", "Ranchi", "Jamshedpur",
+  "Patna", "Guwahati", "Pune", "Mumbai", "Delhi NCR", "Lucknow", "Varanasi",
+];
+
+export const statesServed = [
+  "West Bengal", "Jharkhand", "Bihar", "Odisha", "Maharashtra",
+  "Uttar Pradesh", "Delhi", "Assam", "Telangana", "Andhra Pradesh",
 ];
 
 export const stats = [
