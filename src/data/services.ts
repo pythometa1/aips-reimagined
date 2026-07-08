@@ -15,6 +15,7 @@ import photoTermite from "@/assets/service-termite.jpg";
 import photoBedbug from "@/assets/service-bedbug.jpg";
 import photoFogging from "@/assets/service-fogging.jpg";
 import photoWoodborer from "@/assets/service-woodborer.jpg";
+import photoRodent from "@/assets/service-rodent.jpg";
 
 export type FAQ = { q: string; a: string };
 
