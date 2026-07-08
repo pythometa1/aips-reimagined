@@ -9,10 +9,12 @@ import silverfish from "@/assets/pest-silverfish.png";
 import carpetbeetle from "@/assets/pest-carpetbeetle.png";
 import spider from "@/assets/pest-spider.png";
 import fly from "@/assets/pest-fly.png";
+import woodborer from "@/assets/pest-woodborer.png";
 import photoCockroach from "@/assets/service-cockroach-gel.jpg";
 import photoTermite from "@/assets/service-termite.jpg";
 import photoBedbug from "@/assets/service-bedbug.jpg";
 import photoFogging from "@/assets/service-fogging.jpg";
+import photoWoodborer from "@/assets/service-woodborer.jpg";
 
 export type FAQ = { q: string; a: string };
 
@@ -162,6 +164,70 @@ export const services: Service[] = [
       "Storage advice for silks and woollens",
     ],
     warranty: "3 months written warranty",
+  },
+  {
+    slug: "wood-borer-control",
+    name: "Wood Borer Control",
+    short: "Wood Borer",
+    illust: woodborer,
+    photo: photoWoodborer,
+    summary:
+      "Targeted injection-and-seal treatment for powder-post beetles, old-house borers and death-watch beetles — protects furniture, door frames, beams and antiques from within.",
+    approach: [
+      "Full inspection to identify borer species, exit-hole pattern and infestation stage",
+      "Direct injection of anti-borer chemistry into every exit hole",
+      "Surface coat with protective borer-resistant sealer on exposed timber",
+      "Follow-up inspection at day 45 and preventive advice for humidity control",
+    ],
+    warranty: "12 months written warranty · free callbacks",
+    intro:
+      "Wood borers are beetles — not termites — but the damage they cause looks similar. Their larvae tunnel deep inside furniture, door frames, beams and antiques, weakening the wood from the inside out. At AIPS, our wood borer control programme is built to reach the larvae inside the timber, not just the surface. Every treatment starts with species identification (powder-post beetle, old-house borer or death-watch beetle) and ends with a written 12-month warranty so you never pay twice.",
+    signs: [
+      "Small round exit holes (1–2 mm) on furniture, door frames, beams or plywood",
+      "Fine powdery dust (frass) collecting under wooden items or in drawers",
+      "Faint tapping or clicking sounds from within the wood, usually at night",
+      "Weak, hollow or crumbling wood — sagging beams or soft patches on furniture",
+      "Repeat holes appearing after DIY polish or surface sprays",
+    ],
+    risks: [
+      "Structural weakening of beams, staircases, door frames and heritage woodwork",
+      "Irreversible damage to antiques, musical instruments and imported furniture",
+      "Spread from a single infested piece to every wooden item in the room",
+      "Costly carpentry and replacement bills when damage is discovered too late",
+    ],
+    benefits: [
+      "Species-specific injection reaches larvae hidden deep inside the timber",
+      "CIB-approved borer chemistry — safe for indoor furniture and cupboards",
+      "Protective sealer coat prevents fresh egg-laying on exposed wood",
+      "Written 12-month warranty with free re-treatment if activity returns",
+      "Detailed report showing every treated item and product used",
+    ],
+    faqs: [
+      {
+        q: "Are wood borers the same as termites?",
+        a: "No. Wood borers are beetles whose larvae tunnel through wood; termites are social insects that build mud tubes and colonies. The damage can look similar but the treatment is completely different. That is why species identification during our inspection is critical.",
+      },
+      {
+        q: "Which wood borer species do you treat?",
+        a: "All the common Indian species — powder-post beetles (the most frequent in furniture and plywood), old-house borers (beams and rafters) and death-watch beetles (older, seasoned hardwood). Each has a different life cycle, and our protocol is tuned to the species we identify on site.",
+      },
+      {
+        q: "Do I need to move my furniture out of the house?",
+        a: "No. Our injection-and-seal treatment is done in place, item by item. We only ask you to clear the drawers and shelves so the technician has full access to the wood surface and exit holes.",
+      },
+      {
+        q: "Is the treatment safe for children, elderly and pets?",
+        a: "Yes. We use CIB-approved borer actives at strict label-rate dilutions, applied through targeted injection rather than open spraying. Rooms are safe to re-enter within an hour of treatment.",
+      },
+      {
+        q: "Will a single treatment be enough?",
+        a: "For most household infestations, one properly injected treatment plus a follow-up inspection at day 45 is enough — and it is covered by our 12-month written warranty. Heritage properties, old wooden beams or repeat-infestation homes may need an annual preventive coat.",
+      },
+      {
+        q: "In which cities do you offer wood borer control?",
+        a: "Across all 19 AIPS cities — including Kolkata, Howrah, Durgapur, Bhubaneswar, Ranchi, Jamshedpur, Patna, Guwahati, Pune, Mumbai, Delhi NCR, Lucknow and Varanasi. Book a free inspection and a trained technician will visit within 24–48 hours.",
+      },
+    ],
   },
   {
     slug: "spider-control",
