@@ -46,7 +46,7 @@ function ServiceDetail() {
 
   return (
     <>
-      {/* Immersive image hero — technician clearly visible on right, dark gradient on left where the text sits */}
+      {/* Immersive image hero — technician clearly visible on right, dark gradient only on the left where text sits */}
       <section className="relative isolate overflow-hidden bg-forest-deep text-cream">
         <img
           src={heroImage}
@@ -55,16 +55,16 @@ function ServiceDetail() {
           height={1024}
           className="absolute inset-0 h-full w-full object-cover object-right"
         />
-        {/* Left-to-right dark overlay so text on the left is fully legible */}
+        {/* Desktop: left dark panel fades out by ~60% so the technician on the right stays sharp and unblurred */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 hidden md:block"
           style={{
             background:
-              "linear-gradient(90deg, rgba(11,61,46,0.96) 0%, rgba(11,61,46,0.92) 35%, rgba(11,61,46,0.55) 65%, rgba(11,61,46,0.15) 100%)",
+              "linear-gradient(90deg, rgba(11,61,46,0.95) 0%, rgba(11,61,46,0.85) 30%, rgba(11,61,46,0.35) 55%, rgba(11,61,46,0) 72%)",
           }}
         />
-        {/* Vertical bottom fade for mobile legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-forest-deep/30 to-transparent md:hidden" />
+        {/* Mobile: vertical dark wash so text stays legible over the image */}
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/95 via-forest-deep/70 to-forest-deep/40 md:hidden" />
 
         <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28 lg:py-32">
           <div className="max-w-2xl">
