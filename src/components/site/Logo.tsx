@@ -15,55 +15,48 @@ export function Logo({
       className="group flex items-center gap-3"
       aria-label="AIPS — Advanced Indian Pest Solution home"
     >
-      <img
-        src={logo}
-        alt=""
-        width={44}
-        height={44}
-        className="h-10 w-10 shrink-0 transition-transform group-hover:-rotate-3 sm:h-11 sm:w-11"
-      />
+      <span
+        className={`relative grid shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-forest-deep to-forest shadow-[0_8px_20px_-8px_rgba(20,60,40,0.55)] ring-1 ring-forest-deep/20 transition-transform group-hover:-rotate-3 ${
+          isFooter ? "h-12 w-12" : "h-11 w-11 sm:h-12 sm:w-12"
+        }`}
+      >
+        <img
+          src={logo}
+          alt=""
+          className={isFooter ? "h-9 w-9" : "h-8 w-8 sm:h-9 sm:w-9"}
+        />
+        <span
+          aria-hidden
+          className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-amber ring-2 ring-background"
+        />
+      </span>
       {!compact && (
-        <span className="flex min-w-0 flex-col leading-tight">
+        <span className="flex min-w-0 flex-col leading-none">
           <span
             className={
               isFooter
-                ? "font-serif text-[1.05rem] font-semibold text-foreground"
-                : "truncate font-serif text-sm font-semibold text-foreground sm:text-[1.05rem]"
+                ? "text-[10px] font-bold uppercase tracking-[0.22em] text-amber"
+                : "text-[9px] font-bold uppercase tracking-[0.22em] text-amber sm:text-[10px]"
             }
           >
-            Advanced Indian <span className="text-forest">Pest Solution</span>
+            Advanced Indian
           </span>
           <span
             className={
               isFooter
-                ? "mt-0.5 flex flex-wrap items-center gap-x-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-amber"
-                : "mt-0.5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-amber sm:text-[11px]"
+                ? "mt-1 font-serif text-xl font-bold text-forest-deep"
+                : "mt-1 font-serif text-lg font-bold text-forest-deep sm:text-xl"
             }
           >
-            Protecting Your India
-            <span
-              aria-hidden
-              className={
-                isFooter
-                  ? "text-muted-foreground/50"
-                  : "hidden text-muted-foreground/50 sm:inline"
-              }
-            >
-              ·
-            </span>
-            <span
-              className={
-                isFooter
-                  ? "font-medium normal-case tracking-normal text-muted-foreground"
-                  : "hidden font-medium normal-case tracking-normal text-muted-foreground sm:inline"
-              }
-            >
-              Since 2010
-            </span>
+            Pest <span className="text-forest">Solution</span>
           </span>
+          {isFooter && (
+            <span className="mt-1.5 text-[11px] font-medium tracking-wide text-muted-foreground">
+              Protecting Your India · Since 2010
+            </span>
+          )}
         </span>
       )}
     </Link>
   );
 }
-
