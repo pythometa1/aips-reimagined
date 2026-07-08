@@ -26,17 +26,6 @@ export function MobileBottomBar() {
       >
         <div className="relative flex items-stretch justify-between rounded-2xl border border-forest-deep/10 bg-cream/95 px-2 py-2 shadow-[0_12px_40px_-8px_rgba(11,61,46,0.35)] backdrop-blur-md">
           <a
-            href={site.phoneHref}
-            className="group flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-[11px] font-semibold text-forest-deep transition-colors active:bg-forest-deep/10"
-            aria-label="Call us"
-          >
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-forest-deep/10 transition-colors group-active:bg-forest-deep/20">
-              <Phone className="h-4 w-4" />
-            </span>
-            Call
-          </a>
-
-          <a
             href={site.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
@@ -59,6 +48,17 @@ export function MobileBottomBar() {
             </span>
             Free Inspection
           </Link>
+
+          <a
+            href={site.phoneHref}
+            className="group flex flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-[11px] font-semibold text-forest-deep transition-colors active:bg-forest-deep/10"
+            aria-label="Call us"
+          >
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-forest-deep/10 transition-colors group-active:bg-forest-deep/20">
+              <Phone className="h-4 w-4" />
+            </span>
+            Call
+          </a>
         </div>
       </nav>
     </>
