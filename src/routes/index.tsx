@@ -78,20 +78,32 @@ const pillars = [
 function Home() {
   return (
     <>
-      {/* HERO */}
-      <section className="hero-gradient grain-overlay text-cream">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      {/* HERO — full-bleed technician photo, editorial overlay */}
+      <section className="relative isolate overflow-hidden bg-forest-deep text-cream">
+        <img
+          src={heroCrew}
+          alt="AIPS field technician in branded uniform treating a residential society at sunset"
+          width={1600}
+          height={1200}
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-60 md:opacity-80"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-forest-deep via-forest-deep/70 to-transparent md:from-forest-deep/95 md:via-forest-deep/60"
+        />
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-20 md:py-32 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-1.5 text-xs font-medium text-amber ring-1 ring-inset ring-amber/30">
+            <span className="inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-1.5 text-xs font-medium text-amber ring-1 ring-inset ring-amber/30 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-amber" />
-              Family-safe pest control · since 2010
+              India&apos;s trusted pest control · since 2010
             </span>
-            <h1 className="mt-6 font-serif text-5xl font-medium leading-[1.02] text-cream md:text-7xl">
-              Protecting your home,
+            <h1 className="mt-6 font-serif text-4xl font-medium leading-[1.02] text-cream drop-shadow-sm md:text-6xl lg:text-7xl">
+              Protecting your India,
               <br />
-              <span className="italic text-amber">the natural way.</span>
+              <span className="italic text-amber">done right the first time.</span>
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-cream/75 md:text-lg">
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-cream/85 md:text-lg">
               Licensed, science-led pest control with CIB-approved, family-safe treatments and a
               written warranty on every job — across 18 Indian cities.
             </p>
@@ -104,21 +116,68 @@ function Home() {
               ))}
             </ul>
 
-            <div className="mt-8 grid grid-cols-3 gap-3 sm:max-w-lg">
-              <img src={heroCrew} alt="Our trained field crew before dispatch" width={480} height={360} className="aspect-[4/3] rounded-2xl object-cover ring-1 ring-cream/10" />
-              <img src={heroKitchen} alt="Commercial kitchen pest treatment" width={480} height={360} loading="lazy" className="aspect-[4/3] rounded-2xl object-cover ring-1 ring-cream/10" />
-              <img src={heroHandover} alt="Warranty handover after a home service" width={480} height={360} loading="lazy" className="aspect-[4/3] rounded-2xl object-cover ring-1 ring-cream/10" />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild className="h-12 rounded-xl px-6 text-base font-semibold shadow-[var(--shadow-cta)]" style={{ background: "var(--gradient-amber)", color: "var(--ink)" }}>
+                <Link to="/contact">Book free inspection <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              </Button>
+              <a href="tel:+919477401805" className="inline-flex h-12 items-center justify-center rounded-xl border border-cream/30 bg-cream/5 px-6 text-base font-medium text-cream backdrop-blur hover:bg-cream/15">
+                Call +91 94774 01805
+              </a>
             </div>
-            <p className="mt-4 flex items-center gap-2 text-xs text-cream/60">
+            <p className="mt-4 flex items-center gap-2 text-xs text-cream/70">
               <ShieldCheck className="h-4 w-4 text-amber" /> Written warranty on company letterhead
             </p>
           </div>
 
-          <div>
+          <div className="hidden lg:block">
             <InspectionForm />
           </div>
         </div>
       </section>
+
+      {/* Inspection form for small screens */}
+      <section className="bg-cream-warm px-6 py-10 lg:hidden">
+        <div className="mx-auto max-w-lg">
+          <InspectionForm />
+        </div>
+      </section>
+
+      {/* REAL WORK STRIP — Entomon-style service photo grid */}
+      <Section
+        eyebrow="Real crews · real jobs"
+        title="What a family-safe treatment actually looks like"
+        intro="No stock photos. Every image below is a treatment we perform every day, in Indian homes and societies."
+      >
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { img: serviceBedbug, slug: "bed-bug-control", title: "Bed bug treatment", tag: "Residential" },
+            { img: serviceFogging, slug: "mosquito-control", title: "Society fogging", tag: "Apartment complex" },
+            { img: serviceCockroach, slug: "cockroach-control", title: "Cockroach gel baiting", tag: "Kitchen · odourless" },
+            { img: serviceTermite, slug: "termite-control", title: "Termite inspection & injection", tag: "Up to 10-yr warranty" },
+          ].map((c) => (
+            <Link
+              key={c.slug}
+              to="/services/$slug"
+              params={{ slug: c.slug }}
+              className="group relative block overflow-hidden rounded-3xl shadow-[var(--shadow-card)]"
+            >
+              <img
+                src={c.img}
+                alt={c.title}
+                width={1600}
+                height={1200}
+                loading="lazy"
+                className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-forest-deep/90 via-forest-deep/40 to-transparent p-5 text-cream">
+                <p className="text-[11px] uppercase tracking-widest text-amber">{c.tag}</p>
+                <p className="mt-1 font-serif text-lg leading-tight">{c.title}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </Section>
+
 
       {/* PEST GRID */}
       <Section
