@@ -14,6 +14,8 @@ import photoTermite from "@/assets/service-termite.jpg";
 import photoBedbug from "@/assets/service-bedbug.jpg";
 import photoFogging from "@/assets/service-fogging.jpg";
 
+export type FAQ = { q: string; a: string };
+
 export type Service = {
   slug: string;
   name: string;
@@ -23,6 +25,11 @@ export type Service = {
   summary: string;
   approach: string[];
   warranty: string;
+  intro?: string;
+  signs?: string[];
+  risks?: string[];
+  benefits?: string[];
+  faqs?: FAQ[];
 };
 
 export const services: Service[] = [
