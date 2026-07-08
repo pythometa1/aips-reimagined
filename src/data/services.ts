@@ -236,3 +236,71 @@ export const services: Service[] = [
 ];
 
 export const findService = (slug: string) => services.find((s) => s.slug === slug);
+
+// Rich content used by service detail pages. Per-service overrides win;
+// otherwise we render sensible, pest-name-aware defaults so no page ever feels empty.
+export function getServiceContent(s: Service) {
+  const name = s.short.toLowerCase();
+
+  const intro =
+    s.intro ??
+    `${s.name} at AIPS is delivered by trained, in-house technicians using CIB-approved, family-safe chemistry — with a written warranty on every job. From the first inspection to the final follow-up, every step of our ${name} protocol is documented, so you know exactly what was applied, where and why.`;
+
+  const signs =
+    s.signs ?? [
+      `Live ${name} activity in kitchens, bathrooms or storage areas`,
+      `Droppings, shed skins or trails along skirtings and cabinets`,
+      `Damage to furniture, food packaging, fabric or wiring`,
+      `Musty odour or unusual sounds at night`,
+      `Repeat sightings even after DIY sprays`,
+    ];
+
+  const risks =
+    s.risks ?? [
+      `Contamination of food, utensils and drinking water`,
+      `Allergies, asthma triggers and skin reactions for children and elderly`,
+      `Structural or fabric damage that quietly compounds over months`,
+      `Loss of business reputation for restaurants, hotels and clinics`,
+    ];
+
+  const benefits =
+    s.benefits ?? [
+      `CIB-approved, label-rate chemistry — safe around children and pets`,
+      `Same trained technician on every follow-up visit`,
+      `Written warranty with free callbacks if activity returns`,
+      `No fogging, no strong odour, no need to leave the home for hours`,
+      `Detailed job report and MSDS on request`,
+    ];
+
+  const faqs: FAQ[] =
+    s.faqs ?? [
+      {
+        q: `Is the ${name} treatment safe for children, elderly and pets?`,
+        a: `Yes. We use CIB-approved actives at strict label-rate dilutions with targeted gel or crack-and-crevice application. Rooms are safe to re-enter within an hour of treatment. A herbal-only protocol is available for newborns, asthmatics and pet families.`,
+      },
+      {
+        q: `How long does one ${name} service take?`,
+        a: `A standard residential visit takes 45–90 minutes depending on the size of your home and infestation level. Our technician arrives on time, in uniform, with the full inspection and treatment plan ready.`,
+      },
+      {
+        q: `Do you provide a warranty?`,
+        a: `Every ${s.name.toLowerCase()} job comes with a written warranty — ${s.warranty}. If pest activity returns within that period, we come back and re-treat at no extra cost.`,
+      },
+      {
+        q: `Do we need to leave the house during treatment?`,
+        a: `No. Our protocol is designed so families can stay in the home. We ask you to cover food, put away utensils, and give the technician access to the affected areas. That is usually enough.`,
+      },
+      {
+        q: `Will one visit be enough or do you recommend an AMC?`,
+        a: `For most household infestations a single treatment plus a follow-up is enough. For kitchens, restaurants, warehouses and buildings with recurring pressure, we recommend a monthly, quarterly or annual AMC — with the same technician on every visit.`,
+      },
+    ];
+
+  const process = s.approach.map((a, i) => ({
+    step: String(i + 1).padStart(2, "0"),
+    title: [`Inspection & assessment`, `Targeted treatment`, `Follow-up & prevention`, `Warranty & reporting`][i] ?? `Step ${i + 1}`,
+    body: a,
+  }));
+
+  return { intro, signs, risks, benefits, faqs, process };
+}
