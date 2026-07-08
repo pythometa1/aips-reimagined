@@ -37,10 +37,10 @@ export function SiteHeader() {
 
       {/* main nav */}
       <div className="border-b border-border/60">
-        <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 py-4 lg:grid-cols-[auto_minmax(0,1fr)_auto]">
+        <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 sm:px-6 sm:py-4 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-8">
           <Logo />
 
-          <nav className="hidden justify-center gap-1 lg:flex">
+          <nav className="hidden items-center justify-center gap-1 lg:flex xl:gap-2">
             {nav.map((item) => {
               const active = pathname === item.to || (item.to !== "/" && pathname.startsWith(item.to));
               const isContact = item.to === "/contact";
@@ -48,7 +48,7 @@ export function SiteHeader() {
                 <Link
                   key={item.to}
                   to={item.to}
-                  className={`relative rounded-full px-4 py-2 text-sm font-bold transition-colors ${
+                  className={`relative rounded-full px-3.5 py-2 text-sm font-bold transition-colors xl:px-4 ${
                     isContact
                       ? "bg-amber text-ink shadow-[var(--shadow-cta)] hover:brightness-105"
                       : active
@@ -63,9 +63,15 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2 justify-self-end">
+            <a
+              href={site.phoneHref}
+              className="hidden items-center gap-2 rounded-full border border-forest-deep/15 px-3 py-2 text-xs font-bold text-forest-deep hover:bg-cream-warm md:inline-flex lg:hidden"
+            >
+              <Phone className="h-3.5 w-3.5" /> Call
+            </a>
             <button
               type="button"
-              className="grid h-11 w-11 place-items-center rounded-xl border border-border text-forest-deep lg:hidden"
+              className="grid h-10 w-10 place-items-center rounded-xl border border-border text-forest-deep sm:h-11 sm:w-11 lg:hidden"
               onClick={() => setOpen((v) => !v)}
               aria-label="Toggle menu"
             >
@@ -73,6 +79,7 @@ export function SiteHeader() {
             </button>
           </div>
         </div>
+
 
         {open && (
           <div className="border-t border-border bg-background lg:hidden">
