@@ -7,7 +7,7 @@ export const site = {
   email: "info@advancedindianpestsolution.in",
   hours: "Mon–Sat, 9 AM – 7 PM",
   whatsapp:
-    "https://wa.me/919477401805?text=Hi%20AIPS%20%E2%80%94%20I%27d%20like%20a%20free%20pest%20control%20inspection.",
+    "https://wa.me/919477401805?text=Hi%20AIPS%2C%20I%27d%20like%20to%20request%20a%20pest%20control%20inspection%20for%20my%20home%2Foffice.%0A%0APreferred%20service%20time%3A%20%5BMorning%20%2F%20Afternoon%20%2F%20Evening%20%2F%20Weekend%5D%0A%0APlease%20call%20me%20back%20to%20confirm.",
   address: "Headquartered in Kolkata · Serving 18 cities across India",
 } as const;
 
