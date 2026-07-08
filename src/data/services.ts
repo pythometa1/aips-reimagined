@@ -90,6 +90,7 @@ export const services: Service[] = [
     name: "Mosquito Control",
     short: "Mosquito",
     illust: mosquito,
+    photo: photoFogging,
     summary:
       "Larvicidal treatment at breeding sites plus outdoor residual mist — you can finally sleep without nets.",
     approach: [
