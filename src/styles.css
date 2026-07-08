@@ -115,6 +115,7 @@
   --shadow-card: 0 1px 2px oklch(0.28 0.06 155 / 0.06), 0 8px 24px -12px oklch(0.28 0.06 155 / 0.14);
   --shadow-lifted: 0 4px 8px -2px oklch(0.28 0.06 155 / 0.08), 0 24px 48px -16px oklch(0.28 0.06 155 / 0.24);
   --shadow-cta: 0 10px 30px -8px oklch(0.72 0.18 68 / 0.55);
+  --shadow-whatsapp: 0 10px 30px -8px oklch(0.65 0.2 150 / 0.55);
 }
 
 .dark {
