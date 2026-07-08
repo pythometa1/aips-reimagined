@@ -291,7 +291,7 @@ function ServiceDetail() {
                 href={site.whatsapp}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-whatsapp px-7 text-base font-bold text-whatsapp-foreground shadow-[0_10px_30px_-8px_oklch(0.6_0.2_150/0.55)] transition-transform hover:-translate-y-0.5 hover:shadow-lg"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-whatsapp px-7 text-base font-bold text-whatsapp-foreground shadow-[var(--shadow-whatsapp)] transition-transform hover:-translate-y-0.5 hover:shadow-lg"
               >
                 <MessageCircle className="h-5 w-5" /> WhatsApp
               </a>
