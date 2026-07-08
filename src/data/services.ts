@@ -31,6 +31,7 @@ export const services: Service[] = [
     name: "Cockroach Control",
     short: "Cockroach",
     illust: cockroach,
+    photo: photoCockroach,
     summary:
       "Odourless gel-baiting protocol that removes the entire colony — kitchens ready for use the same evening.",
     approach: [
@@ -45,6 +46,7 @@ export const services: Service[] = [
     name: "Termite Control",
     short: "Termite",
     illust: termite,
+    photo: photoTermite,
     summary:
       "Drill-and-inject anti-termite treatment with CIB-approved chemistry, backed by an industry-leading 10-year letterhead warranty.",
     approach: [
@@ -59,6 +61,7 @@ export const services: Service[] = [
     name: "Bed Bug Control",
     short: "Bed Bug",
     illust: bedbug,
+    photo: photoBedbug,
     summary:
       "Two-visit heat + residual spray protocol that clears eggs and adults — no need to throw out mattresses.",
     approach: [
