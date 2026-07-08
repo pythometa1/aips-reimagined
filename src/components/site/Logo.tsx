@@ -13,7 +13,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       />
       {!compact && (
         <span className="flex min-w-0 flex-col leading-tight">
-          <span className="truncate font-serif text-[0.95rem] font-semibold text-foreground sm:text-[1.05rem]">
+          <span className="truncate font-serif text-sm font-semibold text-foreground sm:text-[1.05rem]">
             Advanced Indian <span className="text-forest">Pest Solution</span>
           </span>
           <span className="mt-0.5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-amber sm:text-[11px]">
