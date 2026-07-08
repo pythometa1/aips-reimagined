@@ -89,11 +89,11 @@ function Home() {
           width={1600}
           height={1200}
           fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-60 md:opacity-80"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-75 md:opacity-95"
         />
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-r from-forest-deep via-forest-deep/70 to-transparent md:from-forest-deep/95 md:via-forest-deep/60"
+          className="absolute inset-0 bg-gradient-to-r from-forest-deep/90 via-forest-deep/60 to-transparent md:from-forest-deep/90 md:via-forest-deep/50"
         />
         <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-20 md:py-32 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
