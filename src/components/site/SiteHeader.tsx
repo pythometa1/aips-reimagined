@@ -48,12 +48,12 @@ export function SiteHeader() {
                 <Link
                   key={item.to}
                   to={item.to}
-                  className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  className={`relative rounded-full px-4 py-2 text-sm font-bold transition-colors ${
                     isContact
                       ? "bg-amber text-ink shadow-[var(--shadow-cta)] hover:brightness-105"
                       : active
-                        ? "bg-forest-deep/5 text-forest-deep"
-                        : "text-muted-foreground hover:text-forest-deep"
+                        ? "bg-forest-deep/5 text-ink"
+                        : "text-ink hover:text-forest-deep"
                   }`}
                 >
                   {item.label}
@@ -84,10 +84,10 @@ export function SiteHeader() {
                     key={item.to}
                     to={item.to}
                     onClick={() => setOpen(false)}
-                    className={`rounded-lg px-3 py-2.5 text-sm font-medium ${
+                    className={`rounded-lg px-3 py-2.5 text-sm font-bold ${
                       isContact
                         ? "bg-amber text-ink shadow-[var(--shadow-cta)]"
-                        : "text-forest-deep hover:bg-cream-warm"
+                        : "text-ink hover:bg-cream-warm"
                     }`}
                   >
                     {item.label}
