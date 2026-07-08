@@ -19,7 +19,6 @@ export const nav = [
   { to: "/clients", label: "Clients" },
   { to: "/gallery", label: "Gallery" },
   { to: "/blogs", label: "Blogs" },
-  { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },
 ] as const;
 

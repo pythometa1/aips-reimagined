@@ -99,6 +99,21 @@ function Blogs() {
           ))}
         </div>
       </Section>
+      <Section>
+        <div className="mx-auto max-w-3xl rounded-3xl border border-border bg-card p-8 text-center shadow-[var(--shadow-card)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-forest">Questions?</p>
+          <h2 className="mt-3 font-serif text-2xl text-foreground">Browse our FAQ</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Cost, safety, warranty, AMC, chemicals — real answers to real questions.
+          </p>
+          <Link
+            to="/faq"
+            className="mt-5 inline-flex items-center justify-center rounded-full bg-forest-deep px-5 py-2.5 text-sm font-medium text-cream hover:bg-forest"
+          >
+            Read FAQ
+          </Link>
+        </div>
+      </Section>
     </>
   );
 }
