@@ -66,6 +66,8 @@
   --forest-soft: oklch(0.62 0.10 155);
   --amber: oklch(0.78 0.16 68);
   --amber-glow: oklch(0.86 0.15 78);
+  --whatsapp: oklch(0.72 0.22 150);
+  --whatsapp-foreground: oklch(0.99 0 0);
   --cream: oklch(0.985 0.012 90);
   --cream-warm: oklch(0.96 0.02 82);
   --ink: oklch(0.18 0.02 155);
