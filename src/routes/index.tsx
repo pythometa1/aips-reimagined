@@ -8,6 +8,9 @@ import serviceBedbug from "@/assets/service-bedbug.jpg";
 import serviceFogging from "@/assets/service-fogging.jpg";
 import serviceCockroach from "@/assets/service-cockroach-gel.jpg";
 import serviceTermite from "@/assets/service-termite.jpg";
+import serveCommercial from "@/assets/serve-commercial.jpg";
+import serveIndustrial from "@/assets/serve-industrial.jpg";
+import serveResidential from "@/assets/serve-residential.jpg";
 import { InspectionForm } from "@/components/site/InspectionForm";
 import { PestCard } from "@/components/site/PestCard";
 import { Section } from "@/components/site/Section";
@@ -208,19 +211,19 @@ function Home() {
         <div className="grid gap-6 md:grid-cols-3">
           {[
             {
-              img: heroKitchen,
+              img: serveCommercial,
               title: "Commercial",
               body: "Restaurants, hotels, offices, hospitals and retail — audit-ready and discreet.",
               bullets: ["HACCP & FSSAI-aligned documentation", "Same technician on every visit", "Flexible schedules", "We attend your audits with you"],
             },
             {
-              img: equipment,
+              img: serveIndustrial,
               title: "Industrial",
               body: "Factories, warehouses and food-processing units with high pest pressure.",
               bullets: ["Tamper-proof bait-station perimeters", "Sighting & trend reporting", "Per-sq.ft annual contracts", "NDA-friendly for pharma & IT"],
             },
             {
-              img: familySafe,
+              img: serveResidential,
               title: "Residential",
               body: "Homes, apartments and villas — family-safe treatment with written warranty.",
               bullets: ["Children & pet-safe protocols", "Odorless gel & herbal options", "Warranty up to 10 years", "Free callbacks within warranty"],
