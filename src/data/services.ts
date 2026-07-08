@@ -15,6 +15,7 @@ import photoTermite from "@/assets/service-termite.jpg";
 import photoBedbug from "@/assets/service-bedbug.jpg";
 import photoFogging from "@/assets/service-fogging.jpg";
 import photoWoodborer from "@/assets/service-woodborer.jpg";
+import photoRodent from "@/assets/service-rodent.jpg";
 
 export type FAQ = { q: string; a: string };
 
@@ -85,6 +86,7 @@ export const services: Service[] = [
     name: "Rodent Control",
     short: "Rodent",
     illust: rat,
+    photo: photoRodent,
     summary:
       "Discreet trap-and-monitor programme for homes; tamper-proof bait-station perimeters for commercial sites.",
     approach: [
