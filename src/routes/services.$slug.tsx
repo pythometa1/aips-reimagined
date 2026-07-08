@@ -1,11 +1,18 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
-import { PageHero } from "@/components/site/PageHero";
+import {
+  ArrowRight, CheckCircle2, ShieldCheck, AlertTriangle, Sparkles,
+  Phone, MessageCircle,
+} from "lucide-react";
 import { Section } from "@/components/site/Section";
 import { InspectionForm } from "@/components/site/InspectionForm";
 import { PestCard } from "@/components/site/PestCard";
-import { findService, services } from "@/data/services";
+import { findService, getServiceContent, services } from "@/data/services";
 import { Button } from "@/components/ui/button";
+import { site } from "@/data/site";
+import serviceHeroFallback from "@/assets/service-hero-technician.jpg";
+import {
+  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
@@ -20,10 +27,11 @@ export const Route = createFileRoute("/services/$slug")({
     const { service } = loaderData;
     return {
       meta: [
-        { title: `${service.name} — Family-Safe, Written Warranty | AIPS` },
+        { title: `${service.name} in India — Family-Safe, Written Warranty | AIPS` },
         { name: "description", content: service.summary },
         { property: "og:title", content: `${service.name} | AIPS` },
         { property: "og:description", content: service.summary },
+        ...(service.photo ? [{ property: "og:image", content: service.photo }] : []),
       ],
     };
   },
@@ -32,70 +40,250 @@ export const Route = createFileRoute("/services/$slug")({
 
 function ServiceDetail() {
   const { service } = Route.useLoaderData();
+  const content = getServiceContent(service);
+  const heroImage = service.photo ?? serviceHeroFallback;
   const others = services.filter((s) => s.slug !== service.slug).slice(0, 4);
 
   return (
     <>
-      <PageHero eyebrow="Service" title={service.name} intro={service.summary}>
-        <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-2 text-sm text-cream ring-1 ring-inset ring-amber/30">
-          <ShieldCheck className="h-4 w-4 text-amber" /> {service.warranty}
-        </div>
-      </PageHero>
+      {/* Immersive image hero — technician clearly visible on right, dark gradient on left where the text sits */}
+      <section className="relative isolate overflow-hidden bg-forest-deep text-cream">
+        <img
+          src={heroImage}
+          alt={`AIPS technician performing ${service.name.toLowerCase()}`}
+          width={1920}
+          height={1024}
+          className="absolute inset-0 h-full w-full object-cover object-right"
+        />
+        {/* Left-to-right dark overlay so text on the left is fully legible */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(11,61,46,0.96) 0%, rgba(11,61,46,0.92) 35%, rgba(11,61,46,0.55) 65%, rgba(11,61,46,0.15) 100%)",
+          }}
+        />
+        {/* Vertical bottom fade for mobile legibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/90 via-forest-deep/30 to-transparent md:hidden" />
 
-      <Section>
-        <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            {service.photo ? (
-              <img
-                src={service.photo}
-                alt={`AIPS technician performing ${service.name.toLowerCase()}`}
-                width={1600}
-                height={1200}
-                className="aspect-[4/3] w-full rounded-3xl object-cover shadow-[var(--shadow-lifted)]"
-              />
-            ) : (
-              <img
-                src={service.illust}
-                alt={`${service.name} illustration`}
-                width={512}
-                height={512}
-                className="h-48 w-48 object-contain"
-              />
-            )}
-            <h2 className="mt-8 font-serif text-3xl text-foreground md:text-4xl">Our approach</h2>
-            <ul className="mt-6 space-y-4">
-              {service.approach.map((a: string, i: number) => (
-                <li key={a} className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-forest-deep font-serif text-sm text-amber">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="text-foreground">{a}</p>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-10 rounded-3xl bg-cream-warm p-6">
-              <div className="flex items-start gap-4">
-                <CheckCircle2 className="mt-1 h-6 w-6 shrink-0 text-forest" />
-                <div>
-                  <p className="font-semibold text-forest-deep">Warranty</p>
-                  <p className="mt-1 text-muted-foreground">{service.warranty}</p>
-                </div>
-              </div>
+        <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28 lg:py-32">
+          <div className="max-w-2xl">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-full bg-amber/20 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-amber ring-1 ring-inset ring-amber/40">
+                Service
+              </span>
+              <span className="rounded-full border border-cream/25 bg-cream/5 px-3 py-1 text-xs font-semibold text-cream/85 backdrop-blur-sm">
+                CIB · Family-safe
+              </span>
+              <span className="rounded-full border border-cream/25 bg-cream/5 px-3 py-1 text-xs font-semibold text-cream/85 backdrop-blur-sm">
+                Written warranty
+              </span>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Button asChild className="h-12 rounded-xl px-6 text-base font-semibold shadow-[var(--shadow-cta)]" style={{ background: "var(--gradient-amber)", color: "var(--ink)" }}>
+            <h1 className="mt-5 font-serif text-4xl font-medium leading-[1.05] text-cream md:text-6xl">
+              {service.name} <span className="text-amber">in India</span>
+            </h1>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-cream/85 md:text-lg">
+              {service.summary}
+            </p>
+
+            <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-2 text-sm text-cream ring-1 ring-inset ring-amber/30 backdrop-blur-sm">
+              <ShieldCheck className="h-4 w-4 text-amber" /> {service.warranty}
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button
+                asChild
+                className="h-12 rounded-xl px-6 text-base font-semibold shadow-[var(--shadow-cta)]"
+                style={{ background: "var(--gradient-amber)", color: "var(--ink)" }}
+              >
                 <Link to="/contact">Book free inspection <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <a href="tel:+919477401805" className="inline-flex h-12 items-center justify-center rounded-xl border border-input px-6 text-base font-medium text-foreground hover:bg-cream-warm">
-                Call +91 94774 01805
+              <a
+                href={site.phoneHref}
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-cream/30 bg-cream/5 px-6 text-base font-medium text-cream backdrop-blur-sm hover:bg-cream/10"
+              >
+                <Phone className="h-4 w-4 text-amber" /> {site.phone}
               </a>
+              <a
+                href={site.whatsapp}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-cream/30 bg-cream/5 px-6 text-base font-medium text-cream backdrop-blur-sm hover:bg-cream/10"
+              >
+                <MessageCircle className="h-4 w-4 text-amber" /> WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Overview + inspection form */}
+      <Section>
+        <div className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr]">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-forest">Overview</p>
+            <h2 className="mt-2 font-serif text-3xl text-foreground md:text-4xl">
+              What our {service.short.toLowerCase()} protocol does
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground md:text-lg">
+              {content.intro}
+            </p>
+
+            {/* Benefits */}
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {content.benefits.map((b) => (
+                <div key={b} className="flex items-start gap-3 rounded-2xl border border-border bg-card p-4">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-forest" />
+                  <p className="text-sm text-foreground">{b}</p>
+                </div>
+              ))}
             </div>
           </div>
 
           <div className="lg:sticky lg:top-28 lg:self-start">
             <InspectionForm />
+          </div>
+        </div>
+      </Section>
+
+      {/* Signs + Risks (two-column dark/light) */}
+      <Section bg="cream">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <article className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
+            <div className="flex items-center gap-3">
+              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-amber/20 text-forest-deep">
+                <Sparkles className="h-5 w-5" />
+              </span>
+              <h3 className="font-serif text-2xl text-foreground">Signs you need this service</h3>
+            </div>
+            <ul className="mt-5 space-y-3">
+              {content.signs.map((s) => (
+                <li key={s} className="flex items-start gap-3 text-muted-foreground">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber" />
+                  <span>{s}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="rounded-3xl bg-forest-deep p-8 text-cream shadow-[var(--shadow-lifted)]">
+            <div className="flex items-center gap-3">
+              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-amber/25 text-amber">
+                <AlertTriangle className="h-5 w-5" />
+              </span>
+              <h3 className="font-serif text-2xl text-cream">Health & property risks</h3>
+            </div>
+            <ul className="mt-5 space-y-3 text-cream/85">
+              {content.risks.map((r) => (
+                <li key={r} className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber" />
+                  <span>{r}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 rounded-2xl bg-cream/10 p-4 text-sm text-cream/85 ring-1 ring-inset ring-cream/15">
+              Untreated {service.short.toLowerCase()} problems compound month after month. A single inspection tells
+              you exactly what you're dealing with.
+            </div>
+          </article>
+        </div>
+      </Section>
+
+      {/* Our process */}
+      <Section
+        eyebrow="Our scientific approach"
+        title={`How AIPS delivers ${service.short.toLowerCase()} treatment`}
+        intro="Inspection first, chemistry second. Every step is documented so nothing is left to guesswork."
+      >
+        <ol className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {content.process.map((p) => (
+            <li
+              key={p.step}
+              className="relative rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)]"
+            >
+              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-forest-deep font-serif text-base text-amber">
+                {p.step}
+              </span>
+              <h4 className="mt-4 font-serif text-lg text-foreground">{p.title}</h4>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-10 rounded-3xl bg-cream-warm p-6">
+          <div className="flex items-start gap-4">
+            <CheckCircle2 className="mt-1 h-6 w-6 shrink-0 text-forest" />
+            <div>
+              <p className="font-semibold text-forest-deep">Warranty on every job</p>
+              <p className="mt-1 text-muted-foreground">{service.warranty}</p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Why AIPS */}
+      <Section bg="cream" eyebrow="Why AIPS" title="Built by agricultural scientists, not call-centre sales.">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { t: "15+ years in the field", b: "Founded 2010 · 40,000+ homes & businesses protected." },
+            { t: "CIB-approved chemistry", b: "Envu, FMC, Syngenta, UPL — strict label-rate dilutions only." },
+            { t: "Same technician, every visit", b: "Trained in-house for 90+ hrs. No sub-contractors." },
+            { t: "Written warranty", b: "Free callbacks if activity returns within the warranty period." },
+          ].map((c) => (
+            <div key={c.t} className="rounded-2xl border border-border bg-card p-5">
+              <p className="font-serif text-lg text-foreground">{c.t}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{c.b}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* FAQ */}
+      <Section eyebrow="FAQ" title={`${service.name} — your questions, answered.`}>
+        <div className="mx-auto max-w-3xl">
+          <Accordion type="single" collapsible className="w-full">
+            {content.faqs.map((f, i) => (
+              <AccordionItem key={f.q} value={`item-${i}`} className="border-border">
+                <AccordionTrigger className="text-left font-serif text-lg text-foreground">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-base leading-relaxed text-muted-foreground">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </Section>
+
+      {/* CTA banner */}
+      <Section>
+        <div className="overflow-hidden rounded-3xl bg-forest-deep p-8 text-cream shadow-[var(--shadow-lifted)] md:p-12">
+          <div className="grid gap-6 md:grid-cols-[1.4fr_auto] md:items-center">
+            <div>
+              <h3 className="font-serif text-2xl text-cream md:text-3xl">
+                Book a free {service.short.toLowerCase()} inspection today.
+              </h3>
+              <p className="mt-2 text-cream/80">
+                A trained AIPS technician will visit, inspect, quote — and only then treat. No pressure, no upsell.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button
+                asChild
+                className="h-12 rounded-xl px-6 text-base font-semibold shadow-[var(--shadow-cta)]"
+                style={{ background: "var(--gradient-amber)", color: "var(--ink)" }}
+              >
+                <Link to="/contact">Book inspection <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              </Button>
+              <a
+                href={site.phoneHref}
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-cream/30 bg-cream/5 px-6 text-base font-medium text-cream hover:bg-cream/10"
+              >
+                <Phone className="h-4 w-4 text-amber" /> {site.phone}
+              </a>
+            </div>
           </div>
         </div>
       </Section>
