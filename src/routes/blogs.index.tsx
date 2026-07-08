@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
 
-export const Route = createFileRoute("/blogs")({
+export const Route = createFileRoute("/blogs/")({
   head: () => ({
     meta: [
       { title: "Blog — Pest Science & Family Safety Guides | AIPS" },

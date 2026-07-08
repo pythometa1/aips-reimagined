@@ -54,7 +54,7 @@ function ServiceDetail() {
             />
             <h2 className="mt-8 font-serif text-3xl text-foreground md:text-4xl">Our approach</h2>
             <ul className="mt-6 space-y-4">
-              {service.approach.map((a, i) => (
+              {service.approach.map((a: string, i: number) => (
                 <li key={a} className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
                   <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-forest-deep font-serif text-sm text-amber">
                     {String(i + 1).padStart(2, "0")}

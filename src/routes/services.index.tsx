@@ -4,7 +4,7 @@ import { Section } from "@/components/site/Section";
 import { PestCard } from "@/components/site/PestCard";
 import { services } from "@/data/services";
 
-export const Route = createFileRoute("/services")({
+export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
       { title: "Pest Control Services — 14 Specialist Protocols | AIPS" },
