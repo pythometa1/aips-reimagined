@@ -1,9 +1,8 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { Phone, Mail, Clock, MessageCircle, Menu, X, ArrowRight } from "lucide-react";
+import { Phone, Mail, Clock, MessageCircle, Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
 import { nav, site } from "@/data/site";
-import { Button } from "@/components/ui/button";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -44,14 +43,17 @@ export function SiteHeader() {
           <nav className="hidden justify-center gap-1 lg:flex">
             {nav.map((item) => {
               const active = pathname === item.to || (item.to !== "/" && pathname.startsWith(item.to));
+              const isContact = item.to === "/contact";
               return (
                 <Link
                   key={item.to}
                   to={item.to}
                   className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                    active
-                      ? "bg-forest-deep/5 text-forest-deep"
-                      : "text-muted-foreground hover:text-forest-deep"
+                    isContact
+                      ? "bg-amber text-ink shadow-[var(--shadow-cta)] hover:brightness-105"
+                      : active
+                        ? "bg-forest-deep/5 text-forest-deep"
+                        : "text-muted-foreground hover:text-forest-deep"
                   }`}
                 >
                   {item.label}
@@ -61,15 +63,6 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2 justify-self-end">
-            <Button
-              asChild
-              className="hidden shadow-[var(--shadow-cta)] hover:shadow-[var(--shadow-cta)] md:inline-flex"
-              style={{ background: "var(--gradient-amber)", color: "var(--ink)" }}
-            >
-              <Link to="/contact">
-                Get Started <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </Button>
             <button
               type="button"
               className="grid h-11 w-11 place-items-center rounded-xl border border-border text-forest-deep lg:hidden"
@@ -84,16 +77,23 @@ export function SiteHeader() {
         {open && (
           <div className="border-t border-border bg-background lg:hidden">
             <nav className="mx-auto flex max-w-7xl flex-col px-6 py-3">
-              {nav.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-forest-deep hover:bg-cream-warm"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {nav.map((item) => {
+                const isContact = item.to === "/contact";
+                return (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    onClick={() => setOpen(false)}
+                    className={`rounded-lg px-3 py-2.5 text-sm font-medium ${
+                      isContact
+                        ? "bg-amber text-ink shadow-[var(--shadow-cta)]"
+                        : "text-forest-deep hover:bg-cream-warm"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
               <a
                 href={site.phoneHref}
                 className="mt-2 rounded-lg bg-forest-deep px-3 py-2.5 text-center text-sm font-medium text-cream"
