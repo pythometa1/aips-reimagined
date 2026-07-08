@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { MobileBottomBar } from "@/components/site/MobileBottomBar";
 
 const SITE_TITLE = "Advanced Indian Pest Solution — Family-Safe Pest Control Since 2010";
 const SITE_DESC =
@@ -129,10 +130,11 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col bg-background">
         <SiteHeader />
-        <main className="flex-1">
+        <main className="flex-1 pb-16 md:pb-0">
           <Outlet />
         </main>
         <SiteFooter />
+        <MobileBottomBar />
       </div>
     </QueryClientProvider>
   );
