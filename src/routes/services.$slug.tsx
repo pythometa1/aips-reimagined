@@ -45,13 +45,23 @@ function ServiceDetail() {
       <Section>
         <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <img
-              src={service.illust}
-              alt={`${service.name} illustration`}
-              width={512}
-              height={512}
-              className="h-48 w-48 object-contain"
-            />
+            {service.photo ? (
+              <img
+                src={service.photo}
+                alt={`AIPS technician performing ${service.name.toLowerCase()}`}
+                width={1600}
+                height={1200}
+                className="aspect-[4/3] w-full rounded-3xl object-cover shadow-[var(--shadow-lifted)]"
+              />
+            ) : (
+              <img
+                src={service.illust}
+                alt={`${service.name} illustration`}
+                width={512}
+                height={512}
+                className="h-48 w-48 object-contain"
+              />
+            )}
             <h2 className="mt-8 font-serif text-3xl text-foreground md:text-4xl">Our approach</h2>
             <ul className="mt-6 space-y-4">
               {service.approach.map((a: string, i: number) => (

@@ -9,12 +9,17 @@ import silverfish from "@/assets/pest-silverfish.png";
 import carpetbeetle from "@/assets/pest-carpetbeetle.png";
 import spider from "@/assets/pest-spider.png";
 import fly from "@/assets/pest-fly.png";
+import photoCockroach from "@/assets/service-cockroach-gel.jpg";
+import photoTermite from "@/assets/service-termite.jpg";
+import photoBedbug from "@/assets/service-bedbug.jpg";
+import photoFogging from "@/assets/service-fogging.jpg";
 
 export type Service = {
   slug: string;
   name: string;
   short: string;
   illust: string;
+  photo?: string;
   summary: string;
   approach: string[];
   warranty: string;
@@ -26,6 +31,7 @@ export const services: Service[] = [
     name: "Cockroach Control",
     short: "Cockroach",
     illust: cockroach,
+    photo: photoCockroach,
     summary:
       "Odourless gel-baiting protocol that removes the entire colony — kitchens ready for use the same evening.",
     approach: [
@@ -40,6 +46,7 @@ export const services: Service[] = [
     name: "Termite Control",
     short: "Termite",
     illust: termite,
+    photo: photoTermite,
     summary:
       "Drill-and-inject anti-termite treatment with CIB-approved chemistry, backed by an industry-leading 10-year letterhead warranty.",
     approach: [
@@ -54,6 +61,7 @@ export const services: Service[] = [
     name: "Bed Bug Control",
     short: "Bed Bug",
     illust: bedbug,
+    photo: photoBedbug,
     summary:
       "Two-visit heat + residual spray protocol that clears eggs and adults — no need to throw out mattresses.",
     approach: [
@@ -82,6 +90,7 @@ export const services: Service[] = [
     name: "Mosquito Control",
     short: "Mosquito",
     illust: mosquito,
+    photo: photoFogging,
     summary:
       "Larvicidal treatment at breeding sites plus outdoor residual mist — you can finally sleep without nets.",
     approach: [
