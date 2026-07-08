@@ -84,10 +84,10 @@ export function SiteHeader() {
                     key={item.to}
                     to={item.to}
                     onClick={() => setOpen(false)}
-                    className={`rounded-lg px-3 py-2.5 text-sm font-medium ${
+                    className={`rounded-lg px-3 py-2.5 text-sm font-bold ${
                       isContact
                         ? "bg-amber text-ink shadow-[var(--shadow-cta)]"
-                        : "text-forest-deep hover:bg-cream-warm"
+                        : "text-ink hover:bg-cream-warm"
                     }`}
                   >
                     {item.label}
