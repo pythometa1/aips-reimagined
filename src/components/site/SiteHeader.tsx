@@ -48,12 +48,12 @@ export function SiteHeader() {
                 <Link
                   key={item.to}
                   to={item.to}
-                  className={`relative rounded-full px-5 py-2.5 text-[15px] font-semibold tracking-tight transition-colors ${
+                  className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                     isContact
                       ? "bg-amber text-ink shadow-[var(--shadow-cta)] hover:brightness-105"
                       : active
-                        ? "bg-forest-deep/10 text-forest-deep"
-                        : "text-forest-deep/80 hover:bg-forest-deep/5 hover:text-forest-deep"
+                        ? "bg-forest-deep/5 text-forest-deep"
+                        : "text-muted-foreground hover:text-forest-deep"
                   }`}
                 >
                   {item.label}
