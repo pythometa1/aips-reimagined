@@ -22,7 +22,7 @@ const fraunces = Fraunces({
 });
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.advancedindianpestsolution.in";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.advancedindianpestsolution.com";
 
 const SITE_TITLE = "Advanced Indian Pest Solution — Family-Safe Pest Control Since 2010";
 const SITE_DESC =
