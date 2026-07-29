@@ -126,7 +126,7 @@ export function FloatingAssistant() {
         onClick={handleToggle}
         aria-expanded={open}
         aria-label={open ? "Close quick contact menu" : "Open quick contact menu"}
-        className="group relative grid h-[86px] w-[86px] place-items-center rounded-full transition-transform duration-200 active:scale-95 sm:h-[98px] sm:w-[98px] md:h-[112px] md:w-[112px]"
+        className="group relative grid h-[108px] w-[108px] place-items-center rounded-full transition-transform duration-200 active:scale-95 sm:h-[124px] sm:w-[124px] md:h-[140px] md:w-[140px]"
       >
         <span
           aria-hidden
@@ -143,7 +143,7 @@ export function FloatingAssistant() {
             src={technician}
             alt=""
             fill
-            sizes="112px"
+            sizes="140px"
             className="object-contain drop-shadow-[0_10px_16px_rgba(11,61,46,0.35)]"
             priority
           />

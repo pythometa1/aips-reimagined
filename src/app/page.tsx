@@ -440,6 +440,40 @@ export default function Home() {
           ))}
         </div>
       </Section>
+
+      {/* CTA */}
+      <section className="hero-gradient grain-overlay">
+        <div className="mx-auto max-w-5xl px-6 py-20 text-center text-cream md:py-28">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber">
+            Trusted by 40,000+ customers across West Bengal
+          </p>
+          <h2 className="mt-4 font-serif text-4xl leading-[1.05] md:text-6xl">
+            Get them out today.
+            <br /> <em className="text-amber">Keep them out for years.</em>
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base text-cream/75 md:text-lg">
+            Free inspection · firm quote · family-safe treatment · documented every time.
+            That&apos;s the AIPS way.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Button
+              asChild
+              className="h-12 rounded-xl px-6 text-base font-semibold shadow-[var(--shadow-cta)]"
+              style={{ background: "var(--gradient-amber)", color: "var(--ink)" }}
+            >
+              <Link href="/contact">
+                Book free inspection <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <a
+              href="tel:+919477401805"
+              className="inline-flex h-12 items-center justify-center rounded-xl border border-cream/30 px-6 text-base font-medium text-cream hover:bg-cream/10"
+            >
+              +91 94774 01805
+            </a>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

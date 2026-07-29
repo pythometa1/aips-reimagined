@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { existsSync } from "node:fs";
+import path from "node:path";
+import { Building2 } from "lucide-react";
 import { Section } from "@/components/site/Section";
+import { clients } from "@/data/clients";
 import clientsHeroBanner from "@/assets/clients-hero-banner.jpg";
 
 export const metadata: Metadata = {
@@ -29,16 +33,13 @@ const industries = [
   "Logistics & Transport",
 ];
 
-const featured = [
-  { name: "Taj Bengal", sector: "Hospitality" },
-  { name: "ITC Sonar", sector: "Hospitality" },
-  { name: "PwC Kolkata", sector: "IT / Offices" },
-  { name: "Apollo Gleneagles", sector: "Healthcare" },
-  { name: "Big Bazaar", sector: "Retail" },
-  { name: "Reliance Fresh", sector: "Retail" },
-  { name: "Haldiram's", sector: "Food" },
-  { name: "Wipro Salt Lake", sector: "IT Parks" },
-];
+const clientsWithLogo = clients
+  .map((c) => ({
+    ...c,
+    hasLogo: existsSync(path.join(process.cwd(), "public", "clients", `${c.slug}.png`)),
+  }))
+  // Clients with a real logo first, name-only fallback tiles at the bottom.
+  .sort((a, b) => Number(b.hasLogo) - Number(a.hasLogo));
 
 export default function Clients() {
   return (
@@ -67,15 +68,35 @@ export default function Clients() {
         </div>
       </Section>
 
-      <Section bg="cream" eyebrow="Featured clients" title="A few of the teams we protect">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-          {featured.map((c) => (
+      <Section
+        bg="cream"
+        eyebrow="Our clients"
+        title="Organizations that trust us"
+        intro="Banks, hospitals, hotels, industries and government offices we've protected across West Bengal."
+      >
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          {clientsWithLogo.map((c) => (
             <div
-              key={c.name}
-              className="rounded-3xl border border-border bg-card p-6 text-center shadow-[var(--shadow-card)]"
+              key={c.slug}
+              title={c.name}
+              className="flex h-full min-h-[172px] flex-col items-center justify-center gap-3 rounded-3xl border border-border bg-card p-5 text-center shadow-[var(--shadow-card)]"
             >
-              <p className="font-serif text-xl text-foreground">{c.name}</p>
-              <p className="mt-1 text-xs uppercase tracking-widest text-forest">{c.sector}</p>
+              <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-cream-warm">
+                {c.hasLogo ? (
+                  <Image
+                    src={`/clients/${c.slug}.png`}
+                    alt={`${c.name} logo`}
+                    width={48}
+                    height={48}
+                    className="h-11 w-11 object-contain"
+                  />
+                ) : (
+                  <Building2 className="h-7 w-7 text-forest/50" strokeWidth={1.6} />
+                )}
+              </div>
+              <p className="line-clamp-4 text-xs leading-snug font-medium text-foreground">
+                {c.name}
+              </p>
             </div>
           ))}
         </div>
