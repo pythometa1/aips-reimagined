@@ -13,11 +13,18 @@ const typeLabels: Record<string, string> = {
   commercial: "Commercial",
 };
 
+// Zero-setup form-to-email relay — no API key required. Forwards submissions
+// to the inbox below (one-time confirmation click required the first time;
+// see https://formsubmit.co).
+const FORM_ENQUIRY_EMAIL = "advancedindianpestsolution@gmail.com";
+
+type Status = "idle" | "submitting" | "emailed" | "whatsapp-fallback";
+
 export function InspectionForm({ variant = "card" }: { variant?: "card" | "flat" }) {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
   const [waLink, setWaLink] = useState("");
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
     const serviceLabel =
@@ -26,21 +33,46 @@ export function InspectionForm({ variant = "card" }: { variant?: "card" | "flat"
         : (services.find((s) => s.slug === data.service)?.name ?? data.service);
     const typeLabel = typeLabels[data.type] ?? data.type;
 
-    const message = [
-      "Hi AIPS, I'd like to book a free inspection.",
-      "",
-      `Name: ${data.name}`,
-      `Phone: ${data.phone}`,
-      `Address: ${data.address}`,
-      `Service: ${serviceLabel}`,
-      `Type: ${typeLabel}`,
-    ].join("\n");
+    setStatus("submitting");
 
-    const waNumber = site.whatsapp.split("?")[0];
-    const link = `${waNumber}?text=${encodeURIComponent(message)}`;
-    window.open(link, "_blank", "noopener,noreferrer");
-    setWaLink(link);
-    setSent(true);
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${FORM_ENQUIRY_EMAIL}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: "New free-inspection request — AIPS website",
+          Name: data.name,
+          Phone: data.phone,
+          Address: data.address,
+          Service: serviceLabel,
+          Type: typeLabel,
+        }),
+      });
+      if (!res.ok) throw new Error(`FormSubmit responded ${res.status}`);
+      // FormSubmit returns HTTP 200 even when it's blocking delivery (e.g.
+      // pending the one-time activation email) — success is only real when
+      // the body says so.
+      const body: { success?: string } = await res.json();
+      if (body.success !== "true") throw new Error(body.success ?? "FormSubmit did not confirm");
+      setStatus("emailed");
+    } catch {
+      // Email relay failed — fall back to a pre-filled WhatsApp message so
+      // the lead is never silently lost.
+      const message = [
+        "Hi AIPS, I'd like to book a free inspection.",
+        "",
+        `Name: ${data.name}`,
+        `Phone: ${data.phone}`,
+        `Address: ${data.address}`,
+        `Service: ${serviceLabel}`,
+        `Type: ${typeLabel}`,
+      ].join("\n");
+      const waNumber = site.whatsapp.split("?")[0];
+      const link = `${waNumber}?text=${encodeURIComponent(message)}`;
+      window.open(link, "_blank", "noopener,noreferrer");
+      setWaLink(link);
+      setStatus("whatsapp-fallback");
+    }
   };
 
   const wrap =
@@ -57,28 +89,38 @@ export function InspectionForm({ variant = "card" }: { variant?: "card" | "flat"
         </p>
       </div>
 
-      {sent ? (
+      {status === "emailed" || status === "whatsapp-fallback" ? (
         <div className="flex items-start gap-3 rounded-2xl bg-forest-deep/5 p-5 text-sm text-forest-deep">
           <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-forest" />
-          <div>
-            <p className="font-semibold">Almost done — send the WhatsApp message.</p>
-            <p className="text-forest-deep/80">
-              We&apos;ve opened WhatsApp with your details filled in. Just hit send and a trained
-              technician will call you back within business hours.
-            </p>
-            <p className="mt-2 text-forest-deep/80">
-              Didn&apos;t open?{" "}
-              <a
-                href={waLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold underline"
-              >
-                Tap here to open WhatsApp
-              </a>{" "}
-              or call {site.phone}.
-            </p>
-          </div>
+          {status === "emailed" ? (
+            <div>
+              <p className="font-semibold">Request received.</p>
+              <p className="text-forest-deep/80">
+                A trained technician will call you back within business hours. For anything urgent,
+                call {site.phone} or WhatsApp us.
+              </p>
+            </div>
+          ) : (
+            <div>
+              <p className="font-semibold">Almost done — send the WhatsApp message.</p>
+              <p className="text-forest-deep/80">
+                We&apos;ve opened WhatsApp with your details filled in. Just hit send and a trained
+                technician will call you back within business hours.
+              </p>
+              <p className="mt-2 text-forest-deep/80">
+                Didn&apos;t open?{" "}
+                <a
+                  href={waLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold underline"
+                >
+                  Tap here to open WhatsApp
+                </a>{" "}
+                or call {site.phone}.
+              </p>
+            </div>
+          )}
         </div>
       ) : (
         <form onSubmit={onSubmit} className="space-y-4">
@@ -166,10 +208,17 @@ export function InspectionForm({ variant = "card" }: { variant?: "card" | "flat"
           </div>
           <Button
             type="submit"
-            className="mt-2 h-12 w-full rounded-xl text-base font-semibold shadow-[var(--shadow-cta)]"
+            disabled={status === "submitting"}
+            className="mt-2 h-12 w-full rounded-xl text-base font-semibold shadow-[var(--shadow-cta)] disabled:opacity-70"
             style={{ background: "var(--gradient-amber)", color: "var(--ink)" }}
           >
-            Get my free inspection <ArrowRight className="ml-2 h-4 w-4" />
+            {status === "submitting" ? (
+              "Sending…"
+            ) : (
+              <>
+                Get my free inspection <ArrowRight className="ml-2 h-4 w-4" />
+              </>
+            )}
           </Button>
           <p className="text-center text-xs text-muted-foreground">
             No OTP. No spam. We use your number only to call you back.
