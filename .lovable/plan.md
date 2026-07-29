@@ -1,4 +1,3 @@
-
 ## Goal
 
 Rebuild the Advanced Indian Pest Solution site (aips-next.vercel.app) inside this TanStack Start project. Keep every route and information block from the reference, but upgrade the visual system to a premium, competitive standard with proper imagery, refined typography, and cohesive design tokens.

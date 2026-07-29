@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import Link from "next/link";
+import { Phone, Mail, MapPin, MessageCircle, Instagram } from "lucide-react";
 import { Logo } from "./Logo";
 import { site, nav } from "@/data/site";
 import { services } from "@/data/services";
@@ -13,7 +13,7 @@ export function SiteFooter() {
             <Logo variant="footer" />
           </div>
           <p className="mt-4 text-sm leading-relaxed text-cream/70">
-            Licensed, science-led pest control with CIB-approved, family-safe treatments and a written warranty on every job.
+            Licensed, science-led pest control with CIB-approved, family-safe treatments.
           </p>
         </div>
 
@@ -24,7 +24,9 @@ export function SiteFooter() {
           <ul className="space-y-2 text-sm text-cream/80">
             {nav.map((n) => (
               <li key={n.to}>
-                <Link to={n.to} className="hover:text-amber">{n.label}</Link>
+                <Link href={n.to} className="hover:text-amber">
+                  {n.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -37,11 +39,7 @@ export function SiteFooter() {
           <ul className="space-y-2 text-sm text-cream/80">
             {services.slice(0, 8).map((s) => (
               <li key={s.slug}>
-                <Link
-                  to="/services/$slug"
-                  params={{ slug: s.slug }}
-                  className="hover:text-amber"
-                >
+                <Link href={`/services/${s.slug}`} className="hover:text-amber">
                   {s.name}
                 </Link>
               </li>
@@ -60,11 +58,21 @@ export function SiteFooter() {
             </li>
             <li className="flex items-start gap-2">
               <Mail className="mt-0.5 h-4 w-4 shrink-0 text-amber" />
-              <a href={`mailto:${site.email}`} className="break-all">{site.email}</a>
+              <a href={`mailto:${site.email}`} className="break-all">
+                {site.email}
+              </a>
             </li>
             <li className="flex items-start gap-2">
               <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber" />
-              <a href={site.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
+              <a href={site.whatsapp} target="_blank" rel="noreferrer">
+                WhatsApp
+              </a>
+            </li>
+            <li className="flex items-start gap-2">
+              <Instagram className="mt-0.5 h-4 w-4 shrink-0 text-amber" />
+              <a href={site.instagram} target="_blank" rel="noreferrer">
+                Instagram
+              </a>
             </li>
             <li className="flex items-start gap-2">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber" />
@@ -75,7 +83,9 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-cream/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-6 text-xs text-cream/60 sm:flex-row">
-          <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} {site.name}. All rights reserved.
+          </p>
           <p>PCO Licensed · CIB Approved · HACCP & FSSAI aligned</p>
         </div>
       </div>

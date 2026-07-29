@@ -1,4 +1,7 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Phone, Mail, Clock, MessageCircle, Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
@@ -6,7 +9,7 @@ import { nav, site } from "@/data/site";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-40 bg-background/85 backdrop-blur-md">
@@ -42,12 +45,13 @@ export function SiteHeader() {
 
           <nav className="hidden items-center justify-center gap-1 lg:flex xl:gap-2">
             {nav.map((item) => {
-              const active = pathname === item.to || (item.to !== "/" && pathname.startsWith(item.to));
+              const active =
+                pathname === item.to || (item.to !== "/" && pathname.startsWith(item.to));
               const isContact = item.to === "/contact";
               return (
                 <Link
                   key={item.to}
-                  to={item.to}
+                  href={item.to}
                   className={`relative rounded-full px-3.5 py-2 text-sm font-bold transition-colors xl:px-4 ${
                     isContact
                       ? "bg-amber text-ink shadow-[var(--shadow-cta)] hover:brightness-105"
@@ -80,7 +84,6 @@ export function SiteHeader() {
           </div>
         </div>
 
-
         {open && (
           <div className="border-t border-border bg-background lg:hidden">
             <nav className="mx-auto flex max-w-7xl flex-col px-6 py-3">
@@ -89,7 +92,7 @@ export function SiteHeader() {
                 return (
                   <Link
                     key={item.to}
-                    to={item.to}
+                    href={item.to}
                     onClick={() => setOpen(false)}
                     className={`rounded-lg px-3 py-2.5 text-sm font-bold ${
                       isContact

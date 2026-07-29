@@ -1,4 +1,5 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import Image from "next/image";
 import logo from "@/assets/aips-logo.png";
 
 export function Logo({
@@ -11,11 +12,11 @@ export function Logo({
   const isFooter = variant === "footer";
   return (
     <Link
-      to="/"
+      href="/"
       className="group flex min-w-0 items-center gap-2.5 sm:gap-3"
       aria-label="Advanced Indian Pest Solution — Protecting Our India"
     >
-      <img
+      <Image
         src={logo}
         alt=""
         width={52}
@@ -33,11 +34,11 @@ export function Logo({
           <span
             className={
               isFooter
-                ? "font-serif text-[1.25rem] font-bold tracking-tight text-foreground"
-                : "truncate font-serif text-[15px] font-bold tracking-tight text-foreground sm:text-lg lg:text-[1.25rem]"
+                ? "font-serif text-[1.25rem] font-bold tracking-tight text-forest"
+                : "truncate font-serif text-[15px] font-bold tracking-tight text-forest sm:text-lg lg:text-[1.25rem]"
             }
           >
-            Advanced Indian <span className="text-forest">Pest Solution</span>
+            Advanced Indian Pest Solution
           </span>
           <span
             className={

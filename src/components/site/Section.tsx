@@ -7,6 +7,8 @@ export function Section({
   children,
   align = "left",
   bg = "default",
+  wide = false,
+  spacing = "default",
   id,
 }: {
   eyebrow?: string;
@@ -15,22 +17,28 @@ export function Section({
   children: ReactNode;
   align?: "left" | "center";
   bg?: "default" | "cream" | "forest";
+  wide?: boolean;
+  spacing?: "default" | "tight";
   id?: string;
 }) {
   const bgClass =
     bg === "forest"
       ? "hero-gradient grain-overlay text-cream"
       : bg === "cream"
-      ? "bg-cream-warm"
-      : "";
+        ? "bg-cream-warm"
+        : "";
+
+  const spacingClass = spacing === "tight" ? "py-10 md:py-14" : "py-20 md:py-28";
 
   const alignClass = align === "center" ? "text-center items-center" : "";
 
   return (
-    <section id={id} className={`${bgClass} py-20 md:py-28`}>
+    <section id={id} className={`${bgClass} ${spacingClass}`}>
       <div className="mx-auto max-w-7xl px-6">
         {(eyebrow || title || intro) && (
-          <div className={`flex max-w-3xl flex-col ${alignClass} ${align === "center" ? "mx-auto" : ""}`}>
+          <div
+            className={`flex ${wide ? "max-w-none" : "max-w-3xl"} flex-col ${alignClass} ${align === "center" ? "mx-auto" : ""}`}
+          >
             {eyebrow && (
               <span
                 className={`text-xs font-semibold uppercase tracking-[0.18em] ${
