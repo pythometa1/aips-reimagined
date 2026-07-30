@@ -209,6 +209,36 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
         </div>
       </Section>
 
+      {/* Featured product (only rendered when a service defines one) */}
+      {service.product && (
+        <Section bg="cream" eyebrow="Featured product" title={service.product.title}>
+          <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+            <Image
+              src={service.product.image}
+              alt={service.product.title}
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="w-full rounded-3xl border border-border object-cover shadow-[var(--shadow-lifted)]"
+            />
+            <div>
+              <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
+                {service.product.description}
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button
+                  asChild
+                  className="h-12 rounded-xl px-6 text-base font-semibold shadow-[var(--shadow-cta)]"
+                  style={{ background: "var(--gradient-amber)", color: "var(--ink)" }}
+                >
+                  <Link href="/contact">
+                    Ask about this for your build <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Section>
+      )}
+
       {/* Signs + Risks (two-column dark/light) */}
       <Section bg="cream">
         <div className="grid gap-6 lg:grid-cols-2">

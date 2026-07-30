@@ -20,8 +20,15 @@ import photoRodent from "@/assets/service-rodent.jpg";
 import photoGeneralPest from "@/assets/service-general-pest-control.jpg";
 import photoCommercialPest from "@/assets/service-commercial-pest-control.jpg";
 import photoHerbalPest from "@/assets/service-herbal-pest-control.jpg";
+import productTermiteReticulationPipes from "@/assets/termite-anti-termite-reticulation-pipes.jpg";
 
 export type FAQ = { q: string; a: string };
+
+export type ServiceProduct = {
+  image: StaticImageData;
+  title: string;
+  description: string;
+};
 
 export type Service = {
   slug: string;
@@ -36,6 +43,7 @@ export type Service = {
   risks?: string[];
   benefits?: string[];
   faqs?: FAQ[];
+  product?: ServiceProduct;
 };
 
 export const services: Service[] = [
@@ -66,6 +74,12 @@ export const services: Service[] = [
       "Chlorpyrifos or Fipronil dilution to strict label rate",
       "Pre-construction pipe-injection for new builds",
     ],
+    product: {
+      image: productTermiteReticulationPipes,
+      title: "Anti-termite reticulation pipes",
+      description:
+        "For new builds, we install a reticulation pipe network in the foundation during construction — a permanent, re-treatable chemical barrier around the building, in 14mm, 17mm and 19mm sizes with compatible elbows, tees, jointers and feeder pipes.",
+    },
   },
   {
     slug: "bed-bug-control",
