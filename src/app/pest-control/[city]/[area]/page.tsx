@@ -27,7 +27,13 @@ import { findCityLocation } from "@/data/locations";
 import { findLocationArea, locationAreas } from "@/data/location-areas";
 import { services } from "@/data/services";
 import { site } from "@/data/site";
-import { breadcrumbListJsonLd, faqPageJsonLd } from "@/lib/jsonld";
+import {
+  breadcrumbListJsonLd,
+  faqPageJsonLd,
+  localBusinessJsonLd,
+  serviceJsonLd,
+} from "@/lib/jsonld";
+import { OG_DEFAULTS } from "@/app/layout";
 
 export function generateStaticParams() {
   return locationAreas.map((a) => ({ city: a.citySlug, area: a.slug }));
@@ -50,7 +56,11 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/pest-control-${loc.slug}/${areaData.slug}` },
-    openGraph: { title, description },
+    openGraph: {
+      ...OG_DEFAULTS,
+      title,
+      description,
+    },
   };
 }
 
@@ -74,11 +84,19 @@ export default async function LocationAreaPage({
     { name: areaData.name, path: `/pest-control-${loc.slug}/${areaData.slug}` },
   ]);
   const faqJsonLd = faqPageJsonLd(loc.faqs);
+  const businessJsonLd = localBusinessJsonLd({ city: `${areaData.name}, ${loc.city}` });
+  const areaServiceJsonLd = serviceJsonLd({
+    name: `Pest Control in ${areaData.name}, ${loc.city}`,
+    description: areaData.blurb,
+    areaServed: `${areaData.name}, ${loc.city}`,
+  });
 
   return (
     <>
       <JsonLd data={breadcrumbJsonLd} />
       <JsonLd data={faqJsonLd} />
+      <JsonLd data={businessJsonLd} />
+      <JsonLd data={areaServiceJsonLd} />
 
       <PageHero
         eyebrow={`${areaData.name} · ${loc.city}`}

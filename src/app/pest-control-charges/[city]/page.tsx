@@ -17,6 +17,7 @@ import { cityPricing, findCityPricing } from "@/data/pricing";
 import { findCityLocation } from "@/data/locations";
 import { site } from "@/data/site";
 import { breadcrumbListJsonLd, faqPageJsonLd } from "@/lib/jsonld";
+import { OG_DEFAULTS } from "@/app/layout";
 
 export function generateStaticParams() {
   return cityPricing.map((c) => ({ city: c.slug }));
@@ -38,7 +39,11 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/pest-control-charges-${pricing.slug}` },
-    openGraph: { title, description },
+    openGraph: {
+      ...OG_DEFAULTS,
+      title,
+      description,
+    },
   };
 }
 

@@ -4,6 +4,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
 import { InspectionForm } from "@/components/site/InspectionForm";
 import { site } from "@/data/site";
+import { OG_DEFAULTS } from "@/app/layout";
 
 export const metadata: Metadata = {
   title: "Contact AIPS — Free Pest Control Inspection | West Bengal",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
     "Book a free pest control inspection across West Bengal. Call +91 94774 01805 or WhatsApp us — real human, business hours.",
   alternates: { canonical: "/contact" },
   openGraph: {
+    ...OG_DEFAULTS,
     title: "Contact AIPS — Free Inspection",
     description:
       "Call, WhatsApp or book online. Same-day inspection in Kolkata, next day elsewhere.",

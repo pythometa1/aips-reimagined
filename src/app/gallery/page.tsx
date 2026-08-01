@@ -11,6 +11,7 @@ import serviceBedbug from "@/assets/service-bedbug.jpg";
 import serviceFogging from "@/assets/service-fogging.jpg";
 import serviceCockroach from "@/assets/service-cockroach-gel.jpg";
 import serviceTermite from "@/assets/service-termite.jpg";
+import { OG_DEFAULTS } from "@/app/layout";
 
 export const metadata: Metadata = {
   title: "Gallery — Field Work Across West Bengal",
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
     "Photos of our field crew, treatments, job report handovers and audit-ready commercial jobs across West Bengal.",
   alternates: { canonical: "/gallery" },
   openGraph: {
+    ...OG_DEFAULTS,
     title: "AIPS Gallery — Field Work Across West Bengal",
     description: "Real photos from real jobs — treatments, handovers, commercial audits.",
   },

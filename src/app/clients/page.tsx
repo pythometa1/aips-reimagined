@@ -6,6 +6,7 @@ import { Building2 } from "lucide-react";
 import { Section } from "@/components/site/Section";
 import { clients } from "@/data/clients";
 import clientsHeroBanner from "@/assets/clients-hero-banner.jpg";
+import { OG_DEFAULTS } from "@/app/layout";
 
 export const metadata: Metadata = {
   title: "Our Clients — Trusted by 40,000+ Homes & Businesses",
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
     "From Fortune 500 pharma plants to family homes, AIPS is trusted by 40,000+ clients across West Bengal.",
   alternates: { canonical: "/clients" },
   openGraph: {
+    ...OG_DEFAULTS,
     title: "Our Clients | AIPS",
     description: "Trusted by 40,000+ homes and businesses across West Bengal.",
   },

@@ -4,6 +4,7 @@ import { Section } from "@/components/site/Section";
 import { PestCard } from "@/components/site/PestCard";
 import { services } from "@/data/services";
 import servicesHeroBanner from "@/assets/services-hero-banner.jpg";
+import { OG_DEFAULTS } from "@/app/layout";
 
 export const metadata: Metadata = {
   title: "Pest Control Services — 14 Specialist Protocols",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
     "Cockroach, termite, bed bug, rodent, mosquito, ant, commercial and herbal pest control — each with its own family-safe protocol.",
   alternates: { canonical: "/services" },
   openGraph: {
+    ...OG_DEFAULTS,
     title: "Pest Control Services | AIPS",
     description: "14 specialist pest control protocols — family-safe and CIB-approved.",
   },

@@ -1,57 +1,71 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "./layout";
+import { SITE_URL } from "@/lib/site-url";
 import { services } from "@/data/services";
 import { posts } from "@/data/blog-posts";
 import { cityLocations } from "@/data/locations";
 import { locationAreas } from "@/data/location-areas";
 import { cityPricing } from "@/data/pricing";
 
+// Fixed build-stamp rather than `new Date()` per entry: a timestamp that
+// changes on every deploy tells Google nothing and gets discounted.
+const lastModified = new Date();
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = [
-    "",
-    "/about",
-    "/services",
-    "/clients",
-    "/gallery",
-    "/blogs",
-    "/faq",
-    "/contact",
-  ].map((route) => ({
-    url: `${SITE_URL}${route}`,
-    lastModified: new Date(),
-  }));
+  const staticRoutes: MetadataRoute.Sitemap = (
+    [
+      { url: `${SITE_URL}`, priority: 1.0, changeFrequency: "weekly" },
+      { url: `${SITE_URL}/services`, priority: 0.9, changeFrequency: "monthly" },
+      { url: `${SITE_URL}/contact`, priority: 0.9, changeFrequency: "monthly" },
+      { url: `${SITE_URL}/about`, priority: 0.6, changeFrequency: "yearly" },
+      { url: `${SITE_URL}/clients`, priority: 0.6, changeFrequency: "monthly" },
+      { url: `${SITE_URL}/gallery`, priority: 0.5, changeFrequency: "monthly" },
+      { url: `${SITE_URL}/blogs`, priority: 0.6, changeFrequency: "weekly" },
+      { url: `${SITE_URL}/faq`, priority: 0.7, changeFrequency: "monthly" },
+    ] satisfies MetadataRoute.Sitemap
+  ).map((r) => ({ ...r, lastModified }));
 
-  const serviceRoutes = services.map((s) => ({
-    url: `${SITE_URL}/services/${s.slug}`,
-    lastModified: new Date(),
-  }));
-
-  const blogRoutes = posts.map((p) => ({
-    url: `${SITE_URL}/blogs/${p.slug}`,
-    lastModified: new Date(),
-  }));
-
-  const cityRoutes = cityLocations.map((c) => ({
+  // Commercial money pages — highest priority after the homepage.
+  const cityRoutes: MetadataRoute.Sitemap = cityLocations.map((c) => ({
     url: `${SITE_URL}/pest-control-${c.slug}`,
-    lastModified: new Date(),
+    lastModified,
+    priority: 0.95,
+    changeFrequency: "weekly",
   }));
 
-  const cityChargesRoutes = cityPricing.map((c) => ({
+  const cityChargesRoutes: MetadataRoute.Sitemap = cityPricing.map((c) => ({
     url: `${SITE_URL}/pest-control-charges-${c.slug}`,
-    lastModified: new Date(),
+    lastModified,
+    priority: 0.9,
+    changeFrequency: "monthly",
   }));
 
-  const areaRoutes = locationAreas.map((a) => ({
+  const serviceRoutes: MetadataRoute.Sitemap = services.map((s) => ({
+    url: `${SITE_URL}/services/${s.slug}`,
+    lastModified,
+    priority: 0.85,
+    changeFrequency: "monthly",
+  }));
+
+  const areaRoutes: MetadataRoute.Sitemap = locationAreas.map((a) => ({
     url: `${SITE_URL}/pest-control-${a.citySlug}/${a.slug}`,
-    lastModified: new Date(),
+    lastModified,
+    priority: 0.7,
+    changeFrequency: "monthly",
+  }));
+
+  const blogRoutes: MetadataRoute.Sitemap = posts.map((p) => ({
+    url: `${SITE_URL}/blogs/${p.slug}`,
+    lastModified,
+    priority: 0.5,
+    changeFrequency: "yearly",
   }));
 
   return [
     ...staticRoutes,
-    ...serviceRoutes,
-    ...blogRoutes,
     ...cityRoutes,
     ...cityChargesRoutes,
+    ...serviceRoutes,
     ...areaRoutes,
+    ...blogRoutes,
   ];
 }

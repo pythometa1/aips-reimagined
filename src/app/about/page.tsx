@@ -33,6 +33,7 @@ import certFaopma from "@/assets/cert-faopma-termite.jpg";
 import certPma from "@/assets/cert-pma-membership.jpg";
 import companyProfile from "@/assets/company-profile.jpg";
 import { site } from "@/data/site";
+import { OG_DEFAULTS } from "@/app/layout";
 
 export const metadata: Metadata = {
   title: "About AIPS — Scientific, Sustainable Pest Management Since 2010",
@@ -40,6 +41,7 @@ export const metadata: Metadata = {
     "Advanced Indian Pest Solution Pvt. Ltd. — founded 2010 in Kolkata by agronomist Anup Karmakar. 40,000+ customers, CIB-approved, women-led opportunities, national industry leadership.",
   alternates: { canonical: "/about" },
   openGraph: {
+    ...OG_DEFAULTS,
     title: "About AIPS — Scientific, Sustainable Pest Management Since 2010",
     description:
       "Founded by Anup Karmakar (National Ambassador & General Secretary, PMA). 40,000+ customers across West Bengal.",

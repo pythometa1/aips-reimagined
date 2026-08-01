@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
+import { OG_DEFAULTS } from "@/app/layout";
 import {
   Accordion,
   AccordionContent,
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
     "Everything you'd want to ask before booking pest control — cost, safety for kids and pets, AMCs, chemicals, preparation.",
   alternates: { canonical: "/faq" },
   openGraph: {
+    ...OG_DEFAULTS,
     title: "AIPS FAQ — Everything Before You Book",
     description: "Cost, safety, AMC, chemicals — real answers to real questions.",
   },

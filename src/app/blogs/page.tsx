@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Section } from "@/components/site/Section";
 import blogsHeroBanner from "@/assets/blogs-hero-banner.jpg";
 import { posts } from "@/data/blog-posts";
+import { OG_DEFAULTS } from "@/app/layout";
 
 export const metadata: Metadata = {
   title: "Blog — Pest Science & Family Safety Guides",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
     "Field-tested guides on cockroach gel baiting, monsoon mosquito control, evaluating termite treatment quality, and family-safe chemistry from AIPS.",
   alternates: { canonical: "/blogs" },
   openGraph: {
+    ...OG_DEFAULTS,
     title: "AIPS Blog — Pest Science & Family Safety",
     description: "Written by our agronomists. Read before you hire your next pest control company.",
   },

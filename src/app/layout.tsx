@@ -7,6 +7,8 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { MobileBottomBar } from "@/components/site/MobileBottomBar";
 import { FloatingAssistant } from "@/components/site/FloatingAssistant";
 import { site } from "@/data/site";
+import { SITE_URL } from "@/lib/site-url";
+import { localBusinessJsonLd } from "@/lib/jsonld";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,12 +23,24 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.advancedindianpestsolution.com";
+// Re-exported for existing importers; canonical definition lives in lib.
+export { SITE_URL };
 
 const SITE_TITLE = "Advanced Indian Pest Solution — Family-Safe Pest Control Since 2010";
 const SITE_DESC =
   "Licensed, science-led pest control with CIB-approved, family-safe treatments — across West Bengal.";
+
+/**
+ * Next.js *replaces* rather than deep-merges `openGraph`, so any page that
+ * sets its own would otherwise drop locale/siteName/type/image. Spread this
+ * into every page-level `openGraph` to keep those intact.
+ */
+export const OG_DEFAULTS = {
+  type: "website" as const,
+  siteName: site.name,
+  locale: "en_IN",
+  images: [{ url: "/icon-512.png", width: 512, height: 512, alt: site.name }],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -42,11 +56,9 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
+    ...OG_DEFAULTS,
     title: SITE_TITLE,
     description: SITE_DESC,
-    type: "website",
-    siteName: site.name,
-    locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
@@ -61,34 +73,13 @@ export const viewport: Viewport = {
   themeColor: "#0B3D2E",
 };
 
-const localBusinessJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": `${SITE_URL}/#organization`,
-  name: site.name,
-  alternateName: site.short,
-  url: SITE_URL,
-  telephone: site.phone,
-  email: site.email,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "10, Central Park East, Jadavpur",
-    addressLocality: "Kolkata",
-    postalCode: "700032",
-    addressCountry: "IN",
-  },
-  areaServed: { "@type": "State", name: "West Bengal" },
-  sameAs: [site.instagram],
-  priceRange: "₹₹",
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="en-IN" className={`${inter.variable} ${fraunces.variable}`}>
       <body className="flex min-h-screen flex-col bg-background">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd()) }}
         />
         <SiteHeader />
         <main className="flex-1">{children}</main>

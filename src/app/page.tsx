@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { CheckCircle2, ArrowRight, ShieldCheck, Sparkles, Users, Award } from "lucide-react";
@@ -19,7 +20,21 @@ import { services } from "@/data/services";
 import { cities } from "@/data/site";
 import { cityLocations } from "@/data/locations";
 import { JsonLd } from "@/components/site/JsonLd";
-import { websiteJsonLd } from "@/lib/jsonld";
+import { websiteJsonLd, organizationJsonLd } from "@/lib/jsonld";
+import { OG_DEFAULTS } from "@/app/layout";
+
+// `absolute` bypasses the layout's `%s | AIPS` template, which would push the
+// title past the ~60-char SERP truncation point.
+const HOME_TITLE = "Pest Control in Kolkata & West Bengal | AIPS";
+const HOME_DESC =
+  "Looking for pest control in Kolkata? AIPS delivers licensed, CIB-approved, family-safe cockroach, termite, bed bug, rodent and mosquito treatment across Kolkata and West Bengal. Free inspection, firm quote.";
+
+export const metadata: Metadata = {
+  title: { absolute: HOME_TITLE },
+  description: HOME_DESC,
+  alternates: { canonical: "/" },
+  openGraph: { ...OG_DEFAULTS, title: HOME_TITLE, description: HOME_DESC },
+};
 
 const bullets = [
   "Same-day inspection",
@@ -81,6 +96,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={websiteJsonLd()} />
+      <JsonLd data={organizationJsonLd()} />
 
       {/* HERO — full-bleed technician photo, editorial overlay */}
       <section className="relative isolate overflow-hidden bg-forest-deep text-cream">
@@ -102,7 +118,7 @@ export default function Home() {
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-1.5 text-xs font-medium text-amber ring-1 ring-inset ring-amber/30 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-amber" />
-              West Bengal&apos;s trusted pest control · since 2010
+              Kolkata &amp; West Bengal&apos;s trusted pest control · since 2010
             </span>
             <h1 className="mt-6 font-serif text-4xl font-medium leading-[1.02] text-cream drop-shadow-sm md:text-6xl lg:text-7xl">
               Protecting your India,
@@ -110,8 +126,8 @@ export default function Home() {
               <span className="italic text-amber">done right the first time.</span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-cream/85 md:text-lg">
-              Licensed, science-led pest control with CIB-approved, family-safe treatments — across
-              West Bengal.
+              Licensed, science-led pest control in Kolkata and across West Bengal — CIB-approved,
+              family-safe treatments from a team trained in-house since 2010.
             </p>
 
             <ul className="mt-8 grid max-w-lg grid-cols-1 gap-3 sm:grid-cols-2">

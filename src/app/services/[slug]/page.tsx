@@ -17,9 +17,10 @@ import { findService, getServiceContent, services } from "@/data/services";
 import { getPestBiology } from "@/data/pest-biology";
 import { PestBiologySection } from "@/components/site/PestBiologySection";
 import { Button } from "@/components/ui/button";
-import { site } from "@/data/site";
-import { SITE_URL } from "@/app/layout";
+import { site, cities } from "@/data/site";
+import { serviceJsonLd } from "@/lib/jsonld";
 import serviceHeroFallback from "@/assets/service-hero-technician.jpg";
+import { OG_DEFAULTS } from "@/app/layout";
 import {
   Accordion,
   AccordionContent,
@@ -41,10 +42,11 @@ export async function generateMetadata({
   if (!service) return { title: "Service not found", robots: { index: false } };
 
   return {
-    title: `${service.name} in West Bengal — Family-Safe Pest Control`,
+    title: `${service.name} in Kolkata & West Bengal`,
     description: service.summary,
     alternates: { canonical: `/services/${service.slug}` },
     openGraph: {
+      ...OG_DEFAULTS,
       title: `${service.name} | ${site.short}`,
       description: service.summary,
       images: service.photo ? [{ url: service.photo.src }] : undefined,
@@ -62,15 +64,13 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
   const heroImage = service.photo ?? serviceHeroFallback;
   const others = services.filter((s) => s.slug !== service.slug).slice(0, 4);
 
-  const serviceJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: service.name,
+  // City-level areaServed: "termite control Kolkata" is the query with volume,
+  // not "termite control West Bengal".
+  const serviceSchema = serviceJsonLd({
     name: service.name,
     description: service.summary,
-    provider: { "@id": `${SITE_URL}/#organization` },
-    areaServed: { "@type": "State", name: "West Bengal" },
-  };
+    areaServed: [...cities],
+  });
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -86,7 +86,7 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
       <script
         type="application/ld+json"
@@ -140,7 +140,7 @@ export default async function ServiceDetail({ params }: { params: Promise<{ slug
             </div>
 
             <h1 className="mt-4 font-serif text-[2rem] font-medium leading-[1.1] text-cream md:mt-5 md:text-6xl">
-              {service.name} <span className="text-amber">in West Bengal</span>
+              {service.name} <span className="text-amber">in Kolkata &amp; West Bengal</span>
             </h1>
             <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-cream/85 md:mt-5 md:text-lg">
               {service.summary}

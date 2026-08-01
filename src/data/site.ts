@@ -9,6 +9,25 @@ export const site = {
   whatsapp:
     "https://wa.me/919477401805?text=Hi%20AIPS%2C%20I%27d%20like%20to%20request%20a%20pest%20control%20inspection%20for%20my%20home%2Foffice.%0A%0APreferred%20service%20time%3A%20%5BMorning%20%2F%20Afternoon%20%2F%20Evening%20%2F%20Weekend%5D%0A%0APlease%20call%20me%20back%20to%20confirm.",
   address: "10, Central Park East, Jadavpur, Kolkata – 700032",
+  // Structured NAP — must stay byte-consistent with the Google Business
+  // Profile listing; inconsistent NAP suppresses local ranking.
+  addressParts: {
+    street: "10, Central Park East, Jadavpur",
+    locality: "Kolkata",
+    region: "West Bengal",
+    postalCode: "700032",
+    country: "IN",
+  },
+  // Approximate office coordinates (Jadavpur, Kolkata). VERIFY against the
+  // exact Google Business Profile pin before treating as authoritative.
+  geo: { latitude: 22.4986, longitude: 88.3714 },
+  // Mon–Sat, 9 AM – 7 PM — keep in sync with `hours` above.
+  openingHours: {
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    opens: "09:00",
+    closes: "19:00",
+  },
+  foundingDate: "2010",
   gst: "19ABCCA7450J1ZG",
   instagram:
     "https://www.instagram.com/global_business_point_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",

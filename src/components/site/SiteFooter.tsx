@@ -3,8 +3,14 @@ import { Phone, Mail, MapPin, MessageCircle, Instagram } from "lucide-react";
 import { Logo } from "./Logo";
 import { site, nav } from "@/data/site";
 import { services } from "@/data/services";
+import { cityLocations } from "@/data/locations";
+import { locationAreas } from "@/data/location-areas";
 
 export function SiteFooter() {
+  // Sitewide internal links into the location cluster — without these, the
+  // area pages hang off a single link near the bottom of the homepage.
+  const areaLinks = locationAreas.slice(0, 8);
+
   return (
     <footer className="hero-gradient grain-overlay mt-24 text-cream">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-[1.6fr_1fr_1.2fr_1.3fr]">
@@ -81,6 +87,32 @@ export function SiteFooter() {
           </ul>
         </div>
       </div>
+
+      {/* Areas we serve — sitewide entry point into the location cluster */}
+      <div className="border-t border-cream/10">
+        <div className="mx-auto max-w-7xl px-6 py-10">
+          <h4 className="mb-4 font-sans text-xs font-semibold uppercase tracking-widest text-amber">
+            Areas we serve
+          </h4>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-cream/75">
+            {cityLocations.map((c) => (
+              <li key={c.slug}>
+                <Link href={`/pest-control-${c.slug}`} className="hover:text-amber">
+                  Pest Control in {c.city}
+                </Link>
+              </li>
+            ))}
+            {areaLinks.map((a) => (
+              <li key={`${a.citySlug}-${a.slug}`}>
+                <Link href={`/pest-control-${a.citySlug}/${a.slug}`} className="hover:text-amber">
+                  {a.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
       <div className="border-t border-cream/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-6 text-xs text-cream/60 sm:flex-row">
           <p>

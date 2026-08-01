@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Section } from "@/components/site/Section";
 import { posts, findPost } from "@/data/blog-posts";
+import { OG_DEFAULTS } from "@/app/layout";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -24,6 +25,7 @@ export async function generateMetadata({
     description: post.excerpt,
     alternates: { canonical: `/blogs/${post.slug}` },
     openGraph: {
+      ...OG_DEFAULTS,
       title: post.title,
       description: post.excerpt,
       type: "article",
